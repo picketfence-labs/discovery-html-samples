@@ -1,0 +1,60 @@
+{
+  "version": "0.1",
+  "theme": "light",
+  "html_file": "kong-discovery-review-light.html",
+  "sha256": "1dbdbf3734344e4eefdeb3f7d6b33e0108341481d5c6a50b501e5a4186275def",
+  "bytes": 335752,
+  "pages": 27,
+  "contents_page": true,
+  "parts": [
+    {
+      "part_id": "kong-overview",
+      "content_revision": 3,
+      "pages": 4,
+      "html_file": "kong-overview-light.html",
+      "sha256": "a8e54a8e3b27fd6e4f1c7efc95971f4e3e24874a575c7598e0f9f3f54a5fff34"
+    },
+    {
+      "part_id": "ai-connectivity",
+      "content_revision": 1,
+      "pages": 4,
+      "html_file": "ai-connectivity-light.html",
+      "sha256": "5d5f9de706cb5ac53482a20baddde057c06030e5701f91d6abe24d68b1f13611"
+    },
+    {
+      "part_id": "ai-gateway",
+      "content_revision": 1,
+      "pages": 6,
+      "html_file": "ai-gateway-light.html",
+      "sha256": "875d1aefcaee0c6a487da8c2ef8c3925fd5340af761de7d25d5e4a5842f1e4c1"
+    },
+    {
+      "part_id": "context-mesh",
+      "content_revision": 3,
+      "pages": 5,
+      "html_file": "context-mesh-light.html",
+      "sha256": "9c46cb59f165e9894ee8a4808cc384a379613140357f9e0dbf5add15fd0fc026"
+    },
+    {
+      "part_id": "kong-vs-mulesoft",
+      "content_revision": 5,
+      "pages": 4,
+      "html_file": "kong-vs-mulesoft-light.html",
+      "sha256": "f1b027f5821195dd134d3d052449adcf149ab800f90dc6bf3a3a9fd1a82d1a08"
+    },
+    {
+      "part_id": "kong-vs-apigee",
+      "content_revision": 5,
+      "pages": 4,
+      "html_file": "kong-vs-apigee-light.html",
+      "sha256": "774bce32b6a52b319da2d7ecb61d49220f2006760e2c87163e343ed292a3bee8"
+    }
+  ],
+  "palette": {
+    "background": "#D7DED4",
+    "panel": "#B3BAB2",
+    "ink": "#42453E",
+    "line": "#AEB5A7",
+    "accent": "#CCFF00"
+  }
+}
