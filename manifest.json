@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "theme": "dark",
+  "html_file": "kong-discovery-review-dark.html",
+  "sha256": "a9f62ebd27f7486297e697d28df3a5a59cf9f6ff6847f79a23c24aa79cbfc66b",
+  "bytes": 334774,
+  "pages": 27,
+  "contents_page": true,
+  "parts": [
+    {
+      "part_id": "kong-overview",
+      "revision": 3,
+      "pages": 4
+    },
+    {
+      "part_id": "ai-connectivity",
+      "revision": 1,
+      "pages": 4
+    },
+    {
+      "part_id": "ai-gateway",
+      "revision": 1,
+      "pages": 6
+    },
+    {
+      "part_id": "context-mesh",
+      "revision": 3,
+      "pages": 5
+    },
+    {
+      "part_id": "kong-vs-mulesoft",
+      "revision": 5,
+      "pages": 4
+    },
+    {
+      "part_id": "kong-vs-apigee",
+      "revision": 5,
+      "pages": 4
+    }
+  ]
+}
