@@ -1,0 +1,32 @@
+{
+  "version": "0.2",
+  "theme": "dark",
+  "flow": "vertical-only",
+  "html_file": "kong-discovery-review-dark-v0.2.html",
+  "sha256": "fad4552d9f848932d714670f1739f2093d82c4723bcb85e08e598a9b7e35e849",
+  "bytes": 282186,
+  "content_pages": 15,
+  "cover_pages": 1,
+  "chapter_end_pages": 3,
+  "total_pages": 19,
+  "parts": [
+    {
+      "number": "02",
+      "part_id": "ai-connectivity",
+      "source_revision": 1,
+      "content_pages": 4
+    },
+    {
+      "number": "03",
+      "part_id": "ai-gateway",
+      "source_revision": 1,
+      "content_pages": 6
+    },
+    {
+      "number": "04",
+      "part_id": "context-mesh",
+      "source_revision": 3,
+      "content_pages": 5
+    }
+  ]
+}
