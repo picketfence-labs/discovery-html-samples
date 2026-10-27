@@ -36,3 +36,11 @@ Two security stories: API security (6 pages) and AI security (8 pages), with a 1
 - [Japanese instructions](README-security-v0.2-ja.md) · [Manifest](manifest-security-v0.2.json) · [Checksums](SHA256SUMS-security-v0.2.txt)
 
 Existing samples and URLs are retained. This is a separate two-story security review, not an eight-story combined deck.
+
+## Toyota Systems tailored review — Dark v0.1
+
+A 17-page evaluation of the tailored composition, combining shared and case-specific pages. The two TMC case pages are explicitly marked as pending source confirmation; this is not a completed customer presentation.
+
+- [Open evaluation HTML](https://picketfence-labs.github.io/discovery-html-samples/toyota-systems-ai-security-dark-v0.1.html)
+- [Download ZIP](https://picketfence-labs.github.io/discovery-html-samples/toyota-systems-ai-security-dark-v0.1.zip)
+- [Japanese evaluation notes](README-toyota-systems-v0.1-ja.md) · [Checksums](SHA256SUMS-toyota-systems-v0.1.txt)
