@@ -1,0 +1,33 @@
+[
+  {
+    "html_file": "kong-security-review-dark-v0.2.html",
+    "pages": 17,
+    "bytes": 288564,
+    "sha256": "8ed49a77611c3ae04b233c2cb0c2888dc8b59c8ea1e0771adda56b2413da7986",
+    "parts": [
+      "api-security",
+      "ai-security"
+    ],
+    "theme": "dark"
+  },
+  {
+    "html_file": "api-security-dark-v0.2.html",
+    "pages": 6,
+    "bytes": 241814,
+    "sha256": "66ff15ec0a239e1cbd910ff4a0e84a4fbe7913d6fce38ce31ae25b285d47a24f",
+    "parts": [
+      "api-security"
+    ],
+    "theme": "dark"
+  },
+  {
+    "html_file": "ai-security-dark-v0.2.html",
+    "pages": 8,
+    "bytes": 251261,
+    "sha256": "223bf65764211fb75d9f874495b8dd8fc5c0f5dc0c204d48b99b4d450be4d458",
+    "parts": [
+      "ai-security"
+    ],
+    "theme": "dark"
+  }
+]

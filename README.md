@@ -25,3 +25,14 @@ The same six stories and 27 pages in the accepted gray/lime Light palette.
 - [Light manifest](manifest-light.json) · [Light checksums](SHA256SUMS-light.txt)
 
 Individual Light samples: [Kong introduction](kong-overview-light.html), [AI Connectivity](ai-connectivity-light.html), [AI Gateway](ai-gateway-light.html), [Context Mesh](context-mesh-light.html), [Kong vs MuleSoft](kong-vs-mulesoft-light.html), [Kong vs Apigee](kong-vs-apigee-light.html).
+
+## API / AI Security Dark v0.2
+
+Two security stories: API security (6 pages) and AI security (8 pages), with a 17-page combined review including the cover and chapter endings. Vertical navigation and chapter menus. These diagrams explain the configured role of Kong alongside identity, applications and monitoring systems; no live product connections are made.
+
+- [Combined security HTML](https://picketfence-labs.github.io/discovery-html-samples/kong-security-review-dark-v0.2.html)
+- [API security HTML](https://picketfence-labs.github.io/discovery-html-samples/api-security-dark-v0.2.html) · [AI security HTML](https://picketfence-labs.github.io/discovery-html-samples/ai-security-dark-v0.2.html)
+- [Download ZIP](https://picketfence-labs.github.io/discovery-html-samples/kong-security-review-dark-v0.2.zip)
+- [Japanese instructions](README-security-v0.2-ja.md) · [Manifest](manifest-security-v0.2.json) · [Checksums](SHA256SUMS-security-v0.2.txt)
+
+Existing samples and URLs are retained. This is a separate two-story security review, not an eight-story combined deck.
