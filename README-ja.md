@@ -4,9 +4,8 @@
 
 ## ローカルでの開き方
 
-1. ZIPを展開します。
-2. kong-discovery-review-dark.html をChrome / Edge等のデスクトップブラウザで開きます。Webサーバーは不要です。
-3. 全画面ボタンでプレゼンテーション表示にできます。
+1. kong-discovery-review-dark.html をChrome / Edge等のデスクトップブラウザで開きます。Webサーバーは不要です。
+2. 全画面ボタンでプレゼンテーション表示にできます。
 
 CSS・JavaScript・SVG・reveal.jsはHTMLに内包しています。Google Fontsと出典リンクにはネット接続を利用します。フォントが取得できない場合は端末内のフォントに切り替わります。
 

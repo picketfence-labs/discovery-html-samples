@@ -2,7 +2,7 @@
 
 6パーツ・27ページ＋目次のLight版です。Darkと同じ内容・ページ構成・局所操作を収録しています。比較2パーツと統合版は最終受入前です。
 
-ZIPを展開し、kong-discovery-review-light.html をChrome / Edge等で開きます。Webサーバーは不要です。各パーツのHTMLはparts/にあります。
+HTMLを保存し、kong-discovery-review-light.html をChrome / Edge等で開きます。Webサーバーは不要です。各パーツのHTMLも同じ公開フォルダにあります。
 
 目次から各概要へ移動し、左右は概要、上下は同じストーリーの詳細です。下部タブでページを選び、終端の「概要に戻る」で同じストーリーの先頭に戻ります。図の選択はローカル表示の切替で、実APIやAIモデルは呼びません。
 

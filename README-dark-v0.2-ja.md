@@ -2,7 +2,7 @@
 
 02 AI Connectivity / 03 AI Gateway / 04 Context Meshの3パーツです。本文15ページ＋表紙＋章末3ページ、全19ページ。
 
-ZIPを展開し、kong-discovery-review-dark-v0.2.htmlをデスクトップブラウザで開いてください。単一HTMLにCSS・JS・SVG・reveal.jsを内包しています。Google Fontsと出典リンクにはネット接続を利用します。
+HTMLを保存し、kong-discovery-review-dark-v0.2.htmlをデスクトップブラウザで開いてください。単一HTMLにCSS・JS・SVG・reveal.jsを内包しています。Google Fontsと出典リンクにはネット接続を利用します。
 
 - 下へ進む：下部の↓、下キー、Space、PageDown、ホイール、上向きスワイプ。
 - 上へ戻る：下部の↑、上キー、Shift+Space、PageUp、下向きスワイプ。

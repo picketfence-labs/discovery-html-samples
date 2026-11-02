@@ -1,11 +1,18 @@
-# Discovery HTML samples
+# Kong HTML slide samples
+
+## Current master — Dark
+
+[Open all eight components](master-dark.html) · [Japanese instructions](README-master-ja.md) · [Checksum](SHA256SUMS-master-dark.txt)
+
+41 story pages plus contents. Horizontal component navigation, vertical pages within each component. Includes API and AI Security. This repository stores public delivery artifacts; reusable authoring components are managed separately. ZIP delivery has been retired. Previous HTML files and their URLs remain unchanged. The site root still opens the original six-component Dark sample.
+
+## Six-component review v0.1
 
 [Dark review sample](https://picketfence-labs.github.io/discovery-html-samples/) · [Light review sample](https://picketfence-labs.github.io/discovery-html-samples/kong-discovery-review-light.html)
 
 Six stories, 27 story pages plus a table of contents. The sample is prepared for review; this repository and its Pages site are publicly accessible.
 
 - [Portable HTML](https://picketfence-labs.github.io/discovery-html-samples/kong-discovery-review-dark.html)
-- [Download ZIP (HTML, Japanese instructions, manifest and checksum)](https://picketfence-labs.github.io/discovery-html-samples/kong-discovery-review-dark-v0.1.zip)
 - [Japanese review instructions](README-ja.md)
 - [SHA-256 checksum](SHA256SUMS.txt)
 
@@ -20,7 +27,6 @@ This repository contains delivery artifacts only. Original decks, source notes a
 The same six stories and 27 pages in the accepted gray/lime Light palette.
 
 - [Portable Light HTML](https://picketfence-labs.github.io/discovery-html-samples/kong-discovery-review-light.html)
-- [Light ZIP including the combined deck and six individual HTML files](https://picketfence-labs.github.io/discovery-html-samples/kong-discovery-review-light-v0.1.zip)
 - [Japanese Light instructions](README-light-ja.md)
 - [Light manifest](manifest-light.json) · [Light checksums](SHA256SUMS-light.txt)
 
@@ -32,7 +38,6 @@ Two security stories: API security (6 pages) and AI security (8 pages), with a 1
 
 - [Combined security HTML](https://picketfence-labs.github.io/discovery-html-samples/kong-security-review-dark-v0.2.html)
 - [API security HTML](https://picketfence-labs.github.io/discovery-html-samples/api-security-dark-v0.2.html) · [AI security HTML](https://picketfence-labs.github.io/discovery-html-samples/ai-security-dark-v0.2.html)
-- [Download ZIP](https://picketfence-labs.github.io/discovery-html-samples/kong-security-review-dark-v0.2.zip)
 - [Japanese instructions](README-security-v0.2-ja.md) · [Manifest](manifest-security-v0.2.json) · [Checksums](SHA256SUMS-security-v0.2.txt)
 
 Existing samples and URLs are retained. This is a separate two-story security review, not an eight-story combined deck.
@@ -42,5 +47,4 @@ Existing samples and URLs are retained. This is a separate two-story security re
 A 17-page evaluation of the tailored composition, combining shared and case-specific pages. The two TMC case pages are explicitly marked as pending source confirmation; this is not a completed customer presentation.
 
 - [Open evaluation HTML](https://picketfence-labs.github.io/discovery-html-samples/toyota-systems-ai-security-dark-v0.1.html)
-- [Download ZIP](https://picketfence-labs.github.io/discovery-html-samples/toyota-systems-ai-security-dark-v0.1.zip)
 - [Japanese evaluation notes](README-toyota-systems-v0.1-ja.md) · [Checksums](SHA256SUMS-toyota-systems-v0.1.txt)
