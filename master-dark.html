@@ -680,6 +680,108 @@ html[data-layout=vertical] .horizontal-nav{display:none}
 .diagram-emphasis-page .side-copy p{font-size:16px;line-height:1.7}
 .diagram-emphasis-page .pilot-main .part-return{margin-top:14px}
 
+/* Kong APIOps: diagram geometry lives in the component; both themes share the page layout. */
+.apio-page{--apio-focus:#ccff00;--apio-traffic:#aff0db;--apio-wait:#ffd893;--apio-fill:#122a1c}
+html[data-theme="light"] .apio-page{--apio-focus:#3b6234;--apio-traffic:#0c6d57;--apio-wait:#78551b;--apio-fill:#e6ede3}
+.apio-page .subtitle{line-height:1.45}
+.apio-intro .apio-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:42px}
+.apio-track .story-card{position:relative;min-height:168px;border-top:2px solid var(--lime)}
+.apio-track .story-card+.story-card::before{content:'';position:absolute;right:calc(100% + 6px);top:calc(50% - 5px);width:30px;height:10px;background:var(--apio-focus);clip-path:polygon(0 43%,calc(100% - 8px) 43%,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,calc(100% - 8px) 57%,0 57%)}
+.apio-page .story-card h3{font-size:22px;line-height:1.25}
+.apio-page .story-card p{font-size:17px;line-height:1.55}
+.apio-strip{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:baseline;gap:18px;margin-top:18px;padding:12px 14px;border-left:2px solid var(--apio-focus);background:var(--apio-fill);font-size:16px}
+.apio-strip p{color:var(--bay);line-height:1.45}
+.apio-page p.apio-small{margin-top:12px;font-size:13px;color:var(--bay)}
+.apio-model.pilot-main{top:224px}
+.apio-cycle{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:'. offer .' 'improve platform use' '. evaluate .';gap:8px 56px}
+.apio-cycle .story-card{min-height:69px;padding:9px 13px}
+.apio-cycle .story-card h3{font-size:18px}
+.apio-cycle .story-card p{margin-top:3px;font-size:14.5px;line-height:1.4}
+.apio-cycle .apio-cycle-offer{grid-area:offer}
+.apio-cycle .apio-cycle-use{grid-area:use}
+.apio-cycle .apio-cycle-evaluate{grid-area:evaluate}
+.apio-cycle .apio-cycle-improve{grid-area:improve}
+.apio-cycle .apio-cycle-platform{grid-area:platform;border-color:var(--apio-focus);background:var(--apio-fill)}
+.apio-cycle-arrow{position:absolute;transform:translate(-50%,-50%);color:var(--apio-focus);font-size:33px;line-height:1}
+.apio-cycle-outbound{top:27%;left:68%}
+.apio-cycle-observe{top:73%;left:68%}
+.apio-cycle-feedback{top:73%;left:32%}
+.apio-cycle-iterate{top:27%;left:32%}
+.apio-relation-body.pilot-main{top:205px}
+.apio-relation-body .apio-diagram{height:374px}
+.apio-switcher{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:center;gap:14px;border-block:1px solid var(--line);padding:6px 0;margin-bottom:5px}
+.apio-switcher p{font-size:15px;line-height:1.44;color:var(--bay)}
+.apio-choices.choice-row{margin:0;gap:5px;flex-wrap:nowrap}
+.apio-choices.choice-row button{padding:6px 10px;min-height:32px;margin:0}
+.apio-choices.choice-row button[aria-pressed=true]{background:#ccff00;color:#001408}
+.apio-relation-body[data-current-state="access"] .apio-choices button[aria-pressed=true]{background:#aff0db;color:#001408;border-color:var(--apio-traffic)}
+.apio-diagram{width:100%;height:355px;font-family:inherit}
+.apio-diagram .apio-cluster{fill:var(--apio-fill);stroke:var(--line)}
+.apio-diagram .apio-cluster-label{font-size:17px;font-weight:700;fill:var(--apio-focus)}
+.apio-diagram .apio-cluster-label.runtime{fill:var(--apio-traffic)}
+.apio-diagram .apio-node rect{fill:var(--ink);stroke:var(--line);stroke-width:1.25}
+.apio-diagram .apio-actor rect{fill:var(--apio-fill)}
+.apio-diagram .apio-runtime rect{stroke:var(--apio-traffic)}
+.apio-diagram .apio-agent rect{fill:var(--apio-fill);stroke:var(--apio-focus);stroke-width:2}
+.apio-diagram .apio-agent .apio-node-name{font-size:25px;fill:var(--apio-focus)}
+.apio-diagram .apio-node-name{font-size:19px;fill:var(--white);font-weight:700}
+.apio-diagram .apio-node-note{font-size:14px;fill:var(--bay)}
+.apio-link{color:var(--bay)}
+.apio-link.apio-human{color:var(--apio-focus)}
+.apio-link.apio-traffic{color:var(--apio-traffic)}
+.apio-link .apio-line{fill:none;stroke:currentColor;stroke-width:1.8}
+.apio-link.apio-automation .apio-line{stroke-dasharray:5 4}
+.apio-link .apio-tip{fill:currentColor}
+.apio-diagram .apio-link-label{font-size:13px;fill:currentColor;text-anchor:middle;paint-order:stroke;stroke:var(--ink);stroke-width:2px;stroke-linejoin:round}
+.apio-diagram [data-emphasis]{transition:opacity .18s ease}
+.apio-diagram [data-dim=true]{opacity:.25}
+.apio-relation-body[data-current-state="configuration"] .apio-node[data-emphasis="configuration"] rect{stroke:var(--apio-focus);stroke-width:2;fill:var(--apio-fill)}
+.apio-relation-body[data-current-state="access"] .apio-node[data-emphasis="access"] rect{stroke:var(--apio-traffic);stroke-width:2;fill:var(--apio-fill)}
+.apio-page p.apio-legend{font-size:12px;line-height:1.4;color:var(--bay)}
+.apio-stage-body.pilot-main{top:222px}
+.apio-page p.apio-lane{border-top:1px solid var(--line);padding-top:6px;margin-bottom:6px;font-size:15px;color:var(--bay)}
+.apio-flow+.apio-lane{margin-top:10px}
+.apio-flow{display:grid;align-items:stretch}
+.apio-flow-5{grid-template-columns:repeat(4,minmax(0,1fr) minmax(0,.53fr)) minmax(0,1fr)}
+.apio-flow-3{grid-template-columns:repeat(2,minmax(0,1fr) minmax(0,.6fr)) minmax(0,1fr)}
+.apio-flow-node{display:grid;align-content:center;gap:4px;min-height:71px;padding:7px 11px;border:1px solid var(--line);border-radius:5px;background:var(--apio-fill);line-height:1.25}
+.apio-flow-node strong{font-size:18px}
+.apio-flow-node small{color:var(--bay);font-size:13px}
+.apio-flow-edge{display:grid;align-content:center;justify-items:center;gap:1px;text-align:center;color:var(--dim);padding-inline:3px;font-size:12px;line-height:1.16}
+.apio-flow-edge::after,.apio-flow-edge.apio-roundtrip::before{content:'';width:100%;height:8px;background:currentColor}
+.apio-flow-edge::after{clip-path:polygon(0 43%,calc(100% - 7px) 43%,calc(100% - 7px) 0,100% 50%,calc(100% - 7px) 100%,calc(100% - 7px) 57%,0 57%)}
+.apio-roundtrip::after{grid-row:2}
+.apio-flow-response{grid-row:3}
+.apio-flow-edge.apio-roundtrip::before{grid-row:4;clip-path:polygon(100% 43%,7px 43%,7px 0,0 50%,7px 100%,7px 57%,100% 57%)}
+.apio-flow-node[data-stage-status="active"]{border-color:var(--apio-focus);box-shadow:inset 0 0 0 1px var(--apio-focus)}
+.apio-flow-node[data-stage-status="done"]{border-color:var(--apio-focus)}
+.apio-flow-node[data-stage-status="waiting"]{border-color:var(--apio-wait);box-shadow:inset 0 0 0 1px var(--apio-wait)}
+.apio-flow-node[data-stage-status="waiting"] small{color:var(--apio-wait)}
+.apio-flow-edge[data-stage-status="active"],.apio-flow-edge[data-stage-status="done"]{color:var(--apio-focus)}
+.apio-traffic-flow .apio-flow-edge[data-stage-status="active"]{color:var(--apio-traffic)}
+.apio-traffic-flow .apio-flow-node[data-stage-status="active"]{border-color:var(--apio-traffic);box-shadow:inset 0 0 0 1px var(--apio-traffic)}
+.apio-stage-row{display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:12px 24px;border-top:1px solid var(--line);margin-top:12px;padding-top:10px}
+.apio-stage-copy h3{font-size:22px;line-height:1.3}
+.apio-stage-copy p{font-size:16px;line-height:1.5;color:var(--bay);margin-top:4px}
+.apio-stage-actions{display:grid;align-content:start;justify-items:end;gap:6px}
+.apio-replay{border:1px solid var(--line);background:var(--panel);color:var(--white);padding:5px 9px;font-size:13px}
+[data-playing-step] .apio-flow-edge[data-stage-status="active"]::after{animation:apio-forward .44s ease-out both}
+[data-playing-step] .apio-flow-edge[data-stage-status="active"].apio-roundtrip::before{animation:apio-response .38s ease-out .48s both}
+[data-playing-step] .apio-traffic-flow .apio-flow-edge:nth-child(4)[data-stage-status="active"]::after{animation-delay:.2s}
+[data-playing-step] .apio-traffic-flow .apio-flow-edge:nth-child(2)[data-stage-status="active"]::before{animation-delay:.74s}
+@keyframes apio-forward{from{opacity:.22;transform:scaleX(.06);transform-origin:left}}
+@keyframes apio-response{from{opacity:0;transform:scaleX(.06);transform-origin:right}}
+.apio-ai-body.pilot-main{top:218px}
+.apio-ai-body .apio-diagram{height:278px}
+.apio-cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;border-top:1px solid var(--line);padding-top:7px;font-size:15px}
+.apio-cases p{font-size:14px;color:var(--bay);line-height:1.4}
+.apio-ai-body .apio-strip{margin-top:12px;padding:8px 12px}
+@media(prefers-reduced-motion:reduce){
+  .apio-diagram [data-emphasis]{transition:none}
+  [data-playing-step] .apio-flow-edge[data-stage-status="active"]::after,
+  [data-playing-step] .apio-flow-edge[data-stage-status="active"].apio-roundtrip::before{animation:none}
+}
+
 [data-animation-root="connectivity"]{display:block;position:absolute;inset:0;background:var(--ink)}
 [data-animation-root="connectivity"] .c-canvas{position:absolute;left:100px;top:55px;width:1400px;height:760px;font-family:'Funnel Sans','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;color:#fff}
 [data-animation-root="connectivity"] .c-canvas *{box-sizing:border-box}
@@ -885,7 +987,7 @@ html[data-layout=vertical] .horizontal-nav{display:none}
 </style></head><body>
 <header class="chrome topbar"><div class="brand-line">KONG <span>THE AI CONNECTIVITY COMPANY</span></div><div class="top-actions"><button data-overview hidden>概要に戻る ↑</button><button data-toc>目次</button><button data-fullscreen>全画面 ↗</button></div></header>
 <div class="reveal"><main class="slides">
-<section id="contents" data-title="目次"><div class="page pilot-toc extended-catalog large-catalog"><div class="eyebrow">KONG / COMPONENTS</div><div class="toc-layout"><div><h1>Kongの<br>ソリューション</h1><p class="lead">API・AIの接続、管理、セキュリティ。</p><span class="pilot-review-tag">MASTER · DARK</span><p class="toc-note">全13パーツ。通常10パーツ・本文52ページ。<br>animation 3パーツ・25シーン（各トップは別）。<br>左右でパーツ、上下で内容・シーンへ。<br>アニメーションは各シーンで停止。</p></div><div class="toc-list"><a class="toc-entry" data-part-type="story" href="#/kong-overview--overview--overview"><small>01 / 5 PAGES</small><strong>Kongの概要紹介 <span>→</span></strong><p>全体像・課題・基盤・第三者評価・日本の支援体制。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-connectivity--overview--overview"><small>02 / 4 PAGES</small><strong>AI Connectivity <span>→</span></strong><p>分断した接続から、AIを広げる共通基盤へ。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-gateway--overview--overview"><small>03 / 6 PAGES</small><strong>AI Gateway <span>→</span></strong><p>モデル・ツール・AIエージェントを、適切に制御する。</p></a><a class="toc-entry" data-part-type="story" href="#/context-mesh--overview--overview"><small>04 / 5 PAGES</small><strong>Context Mesh <span>→</span></strong><p>必要なツールを探し、必要な結果をAIエージェントへ。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-mulesoft--overview--overview"><small>05 / 4 PAGES</small><strong>Kong vs MuleSoft <span>→</span></strong><p>拡張言語・Context Mesh・DataKitのリアルタイムフローで比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-apigee--overview--overview"><small>06 / 4 PAGES</small><strong>Kong vs Apigee <span>→</span></strong><p>軽量な実行系・DC内完結/Air-Gapped・context最適化で比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-aws--overview--overview"><small>07 / 5 PAGES</small><strong>Kong vs AWS <span>→</span></strong><p>案件を跨ぐAIエージェント接続管理・Bedrock外のLLM選択/切替・LLM負荷削減。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-azure--overview--overview"><small>08 / 5 PAGES</small><strong>Kong vs Azure <span>→</span></strong><p>CSPからの管理独立・配置別AI機能差の解消・LLM外のAPI結果加工。</p></a><a class="toc-entry" data-part-type="story" href="#/api-security--overview--overview"><small>09 / 6 PAGES</small><strong>APIセキュリティ <span>→</span></strong><p>顧客情報へのアクセス、返却項目、悪用対策と運用</p></a><a class="toc-entry" data-part-type="story" href="#/ai-security--overview--overview"><small>10 / 8 PAGES</small><strong>AIセキュリティ <span>→</span></strong><p>データ検査、ツール権限、接続先資格情報と運用</p></a><a class="toc-entry" data-part-type="animation" href="#/ai-connectivity-animation--overview--overview"><small>11 / ANIMATION / 6 SCENES</small><strong>AI Connectivity <span>→</span></strong><p>接続先の広がりと管理</p></a><a class="toc-entry" data-part-type="animation" href="#/llm-connectivity-animation--overview--overview"><small>12 / ANIMATION / 5 SCENES</small><strong>LLM Connectivity <span>→</span></strong><p>モデル接続と入力の保護</p></a><a class="toc-entry" data-part-type="animation" href="#/context-mesh-animation--overview--overview"><small>13 / ANIMATION / 14 SCENES</small><strong>Context Mesh <span>→</span></strong><p>MCP・Context Sprawl・Context Bloat</p></a></div></div></div></section>
+<section id="contents" data-title="目次"><div class="page pilot-toc extended-catalog large-catalog"><div class="eyebrow">KONG / COMPONENTS</div><div class="toc-layout"><div><h1>Kongの<br>ソリューション</h1><p class="lead">API・AIの接続、管理、セキュリティ。</p><span class="pilot-review-tag">MASTER · DARK</span><p class="toc-note">全14パーツ。通常11パーツ・本文59ページ。<br>animation 3パーツ・25シーン（各トップは別）。<br>左右でパーツ、上下で内容・シーンへ。<br>アニメーションは各シーンで停止。</p></div><div class="toc-list"><a class="toc-entry" data-part-type="story" href="#/kong-overview--overview--overview"><small>01 / 5 PAGES</small><strong>Kongの概要紹介 <span>→</span></strong><p>全体像・課題・基盤・第三者評価・日本の支援体制。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-connectivity--overview--overview"><small>02 / 4 PAGES</small><strong>AI Connectivity <span>→</span></strong><p>分断した接続から、AIを広げる共通基盤へ。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-gateway--overview--overview"><small>03 / 6 PAGES</small><strong>AI Gateway <span>→</span></strong><p>モデル・ツール・AIエージェントを、適切に制御する。</p></a><a class="toc-entry" data-part-type="story" href="#/context-mesh--overview--overview"><small>04 / 5 PAGES</small><strong>Context Mesh <span>→</span></strong><p>必要なツールを探し、必要な結果をAIエージェントへ。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-mulesoft--overview--overview"><small>05 / 4 PAGES</small><strong>Kong vs MuleSoft <span>→</span></strong><p>拡張言語・Context Mesh・DataKitのリアルタイムフローで比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-apigee--overview--overview"><small>06 / 4 PAGES</small><strong>Kong vs Apigee <span>→</span></strong><p>軽量な実行系・DC内完結/Air-Gapped・context最適化で比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-aws--overview--overview"><small>07 / 5 PAGES</small><strong>Kong vs AWS <span>→</span></strong><p>案件を跨ぐAIエージェント接続管理・Bedrock外のLLM選択/切替・LLM負荷削減。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-azure--overview--overview"><small>08 / 5 PAGES</small><strong>Kong vs Azure <span>→</span></strong><p>CSPからの管理独立・配置別AI機能差の解消・LLM外のAPI結果加工。</p></a><a class="toc-entry" data-part-type="story" href="#/api-security--overview--overview"><small>09 / 6 PAGES</small><strong>APIセキュリティ <span>→</span></strong><p>顧客情報へのアクセス、返却項目、悪用対策と運用</p></a><a class="toc-entry" data-part-type="story" href="#/ai-security--overview--overview"><small>10 / 8 PAGES</small><strong>AIセキュリティ <span>→</span></strong><p>データ検査、ツール権限、接続先資格情報と運用</p></a><a class="toc-entry" data-part-type="animation" href="#/ai-connectivity-animation--overview--overview"><small>11 / ANIMATION / 6 SCENES</small><strong>AI Connectivity <span>→</span></strong><p>接続先の広がりと管理</p></a><a class="toc-entry" data-part-type="animation" href="#/llm-connectivity-animation--overview--overview"><small>12 / ANIMATION / 5 SCENES</small><strong>LLM Connectivity <span>→</span></strong><p>モデル接続と入力の保護</p></a><a class="toc-entry" data-part-type="animation" href="#/context-mesh-animation--overview--overview"><small>13 / ANIMATION / 14 SCENES</small><strong>Context Mesh <span>→</span></strong><p>MCP・Context Sprawl・Context Bloat</p></a><a class="toc-entry" data-part-type="story" href="#/kong-apiops--overview--overview"><small>14 / 7 PAGES</small><strong>Kong APIOpsとAI駆動運用 <span>→</span></strong><p>Gitによる設定反映、APIの公開と利用、Skillsを使ったAI駆動運用</p></a></div></div></div></section>
 <section data-component="kong-overview" data-story="kong-overview" data-title="Kongの概要紹介">
 <section id="kong-overview--overview--overview" data-page="overview" data-tab="概要" data-title="Kongの概要">
   <div class="page">
@@ -1258,6 +1360,301 @@ html[data-layout=vertical] .horizontal-nav{display:none}
       <g data-el="bloat-effects" transform="translate(950 515)"><text y="22" class="data-label" id="context-mesh-animation--scene--label-079">トークン消費</text><rect data-cost="0" x="0" y="35" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-cost="1" x="38" y="35" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-cost="2" x="76" y="35" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-cost="3" x="114" y="35" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-cost="4" x="152" y="35" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-cost="5" x="190" y="35" width="30" height="15" rx="2" class="meter-cell"></rect><text y="85" class="data-label" id="context-mesh-animation--scene--label-080">処理待ち</text><rect data-wait="0" x="0" y="98" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-wait="1" x="38" y="98" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-wait="2" x="76" y="98" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-wait="3" x="114" y="98" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-wait="4" x="152" y="98" width="30" height="15" rx="2" class="meter-cell"></rect><rect data-wait="5" x="190" y="98" width="30" height="15" rx="2" class="meter-cell"></rect></g>
       <g class="packet" visibility="hidden"><circle r="8"></circle><g class="data-packet"><rect x="-25" y="-19" width="44" height="27" rx="3"></rect><rect x="-22" y="-15" width="44" height="27" rx="3"></rect><rect x="-19" y="-11" width="44" height="27" rx="3"></rect><text x="3" y="7" text-anchor="middle" id="context-mesh-animation--scene--label-081">DATA</text></g></g>
       </svg></div></div><div class="animation-toolbar" data-animation-toolbar></div><div class="takeaway"><span class="tiny-label">THE FLOW</span><p id="context-mesh-animation--scene--takeaway" data-scene-caption>AIエージェントを起点に、接続の流れを追う。</p></div><div class="source-note animation-source"><span>MCP ServerをAPIごとに配置した説明例。すべてのMCP実装の必須構成ではない。メーターは概念表現である。</span><a href="https://modelcontextprotocol.io/specification/latest/client/tools" target="_blank" rel="noopener noreferrer">MCP Tools</a> · <a href="https://developer.konghq.com/context-mesh/" target="_blank" rel="noopener noreferrer">Context Mesh</a></div></div></section>
+</section>
+
+<section data-component="kong-apiops" data-story="kong-apiops" data-title="Kong APIOpsとAI駆動運用">
+<section id="kong-apiops--overview--overview" data-page="overview" data-tab="コンセプト" data-title="APIの変更と公開を繰り返せる運用に">
+  <div class="page pilot-page apio-page ">
+    <div class="eyebrow">14 / KONG APIOPS</div>
+    <h2 id="kong-apiops--overview--heading">APIの変更と公開を繰り返せる運用に</h2>
+    <p id="kong-apiops--overview--lead" class="subtitle">検証と反映を自動化し、担当チームが同じ手順でAPIの変更・公開を繰り返せるようにする。</p>
+    <div class="pilot-main apio-intro"><div class="apio-track"><div class="story-card "><h3 id="kong-apiops--overview--git-title">変更をGitに残す</h3><p id="kong-apiops--overview--git-copy">API仕様とGateway設定をコード化し、変更理由と差分を残す。</p></div><div class="story-card "><h3 id="kong-apiops--overview--review-title">検証して承認する</h3><p id="kong-apiops--overview--review-copy">CI/CDが仕様と設定を検査。担当チームが本番反映と公開をそれぞれ判断する。</p></div><div class="story-card "><h3 id="kong-apiops--overview--publish-title">反映して利用につなぐ</h3><p id="kong-apiops--overview--publish-copy">承認済みの設定を適用し、同じリリースの仕様をDev Portalで公開する。</p></div></div><div class="apio-strip"><strong id="kong-apiops--overview--outcome-label">Kongの管理ツール</strong><p id="kong-apiops--overview--outcome">decKはGatewayのルート・ポリシー、kongctlはKonnectのControl Plane・Catalog・Dev Portalなどを管理する。</p></div></div>
+    <div class="source-note"><a href="https://developer.konghq.com/deck/apiops/" target="_blank" rel="noopener noreferrer">Kong APIOps</a> · <a href="https://developer.konghq.com/kongctl/kongctl-and-deck/" target="_blank" rel="noopener noreferrer">kongctlとdecK</a></div>
+  </div>
+</section>
+
+<section id="kong-apiops--operating-model--operating-model" data-page="operating-model" data-tab="運営モデル" data-title="公開したAPIを利用実績から育てる">
+  <div class="page pilot-page apio-page ">
+    <div class="eyebrow">14 / KONG APIOPS</div>
+    <h2 id="kong-apiops--operating-model--heading">公開したAPIを利用実績から育てる</h2>
+    <p id="kong-apiops--operating-model--lead" class="subtitle">基盤チームが共通の手順を整え、提供チームが利用状況と要望を次の変更に反映する。</p>
+    <div class="pilot-main apio-model"><div class="apio-cycle" role="group" aria-label="提供、利用、評価、改善を繰り返す運営モデル"><div class="story-card apio-cycle-offer"><h3 id="kong-apiops--operating-model--offer-title">提供 · API提供チーム</h3><p id="kong-apiops--operating-model--offer-copy">仕様と利用条件を整え、Dev Portalで公開する。</p></div><div class="story-card apio-cycle-use"><h3 id="kong-apiops--operating-model--use-title">利用 · API利用者</h3><p id="kong-apiops--operating-model--use-copy">APIを見つけ、利用を申請し、アプリから試す。</p></div><div class="story-card apio-cycle-evaluate"><h3 id="kong-apiops--operating-model--evaluate-title">評価 · 基盤チーム</h3><p id="kong-apiops--operating-model--evaluate-copy">初回利用の成否、利用実績、障害や要望を確認する。</p></div><div class="story-card apio-cycle-improve"><h3 id="kong-apiops--operating-model--improve-title">改善 · API提供チーム</h3><p id="kong-apiops--operating-model--improve-copy">実績と要望をもとに仕様・文書・利用条件を改善する。</p></div><div class="story-card apio-cycle-platform"><h3 id="kong-apiops--operating-model--platform-title">基盤チーム（Platform Team）</h3><p id="kong-apiops--operating-model--platform-copy">共通ルール・CI/CD・公開手順を整え、基盤の運用も改善する。</p></div><span class="apio-cycle-arrow apio-cycle-outbound" aria-hidden="true">↘</span><span class="apio-cycle-arrow apio-cycle-observe" aria-hidden="true">↙</span><span class="apio-cycle-arrow apio-cycle-feedback" aria-hidden="true">↖</span><span class="apio-cycle-arrow apio-cycle-iterate" aria-hidden="true">↗</span></div><div class="apio-strip"><strong id="kong-apiops--operating-model--outcome-label">責任の分担</strong><p id="kong-apiops--operating-model--outcome">基盤チームが共通ルールと本番Gatewayを担い、提供チームが個別APIの仕様・公開・改善を担う。</p></div></div>
+    <div class="source-note"><a href="https://developer.konghq.com/konnect-reference-platform/kong-air/" target="_blank" rel="noopener noreferrer">Kongの運用リファレンス</a></div>
+  </div>
+</section>
+
+<section id="kong-apiops--adoption--adoption" data-page="adoption" data-tab="導入" data-title="先行APIを1件選び運用を実演する">
+  <div class="page pilot-page apio-page ">
+    <div class="eyebrow">14 / KONG APIOPS</div>
+    <h2 id="kong-apiops--adoption--heading">先行APIを1件選び運用を実演する</h2>
+    <p id="kong-apiops--adoption--lead" class="subtitle">基盤・提供・利用の各チームで成功条件を決め、次のチームにも使える手順を残す。</p>
+    <div class="pilot-main apio-intro"><div class="apio-track"><div class="story-card "><h3 id="kong-apiops--adoption--select-title">先行対象を決める</h3><p id="kong-apiops--adoption--select-copy">APIを1件選び、提供・利用チームを決める。公開範囲と成功条件を合意する。</p></div><div class="story-card "><h3 id="kong-apiops--adoption--implement-title">共同で仕組みを作る</h3><p id="kong-apiops--adoption--implement-copy">Gitの変更提案から公開までをつなぎ、設定テンプレートと切り戻し手順を残す。</p></div><div class="story-card "><h3 id="kong-apiops--adoption--demo-title">担当チームが実演する</h3><p id="kong-apiops--adoption--demo-copy">提供者が変更を提案し、運用者が反映と復旧を実演する。利用者が最初の呼び出しを確かめる。</p></div></div><div class="apio-strip"><strong id="kong-apiops--adoption--outcome-label">横展開の判断材料</strong><p id="kong-apiops--adoption--outcome">初回利用までの時間、次の変更にかかる工数、切り戻し・復旧時間を測り、次のチームでも手順を使えるか判断する。</p></div><p id="kong-apiops--adoption--services-note" class="apio-small">必要に応じて設計・共同実装・運用引継ぎを支援。</p></div>
+    <div class="source-note"><a href="https://konghq.com/support/kong-professional-services" target="_blank" rel="noopener noreferrer">Kong Professional Services</a></div>
+  </div>
+</section>
+
+<section id="kong-apiops--relationship--relationship" data-page="relationship" data-tab="全体像" data-title="APIOpsの全体像">
+  <div class="page pilot-page apio-page apio-relationship">
+    <div class="eyebrow">14 / KONG APIOPS</div>
+    <h2 id="kong-apiops--relationship--heading">APIOpsの全体像</h2>
+    <div class="pilot-main apio-relation-body" data-controller data-stepper data-default-state="all">
+      <div class="apio-switcher"><div class="choice-row apio-choices" role="group" aria-label="強調する経路"><button id="kong-apiops--relationship--choose-all" type="button" data-state-choice="all" aria-pressed="true">全体</button><button id="kong-apiops--relationship--choose-configuration" type="button" data-state-choice="configuration" aria-pressed="false">設定を反映</button><button id="kong-apiops--relationship--choose-access" type="button" data-state-choice="access" aria-pressed="false">APIを利用</button></div><div aria-live="polite"><p id="kong-apiops--relationship--all-description" data-state-item="all">Gitからの設定反映と、利用者がAPIを見つけて呼び出す経路を一枚で示す。</p><p id="kong-apiops--relationship--configuration-description" data-state-item="configuration" hidden>提供者がGitで変更を提案し、運用者が承認する。CI/CDが承認済みの設定をControl Planeへ直接反映する。</p><p id="kong-apiops--relationship--access-description" data-state-item="access" hidden>Dev Portalで仕様確認と利用登録。アプリがKong GatewayのAPIエンドポイントを呼び、GatewayがAPIサービスへ転送する。</p></div></div>
+<svg class="apio-diagram" viewbox="0 0 1100 460" role="img" aria-labelledby="kong-apiops--relationship--diagram-title kong-apiops--relationship--diagram-description">
+  <title id="kong-apiops--relationship--diagram-title">APIOpsの関係図</title>
+  <desc id="kong-apiops--relationship--diagram-description">提供者からGit・CI/CDを通じてControl Planeへ設定を反映する。利用者はDev PortalでAPIを探し、利用アプリはKong Gatewayを経由してAPIサービスを呼ぶ。</desc>
+  <rect class="apio-cluster management" x="340" y="102" width="475" height="198" rx="9"></rect>
+  <text id="kong-apiops--relationship--konnect" class="apio-cluster-label management" x="352" y="125">Konnect</text>
+  <rect class="apio-cluster runtime" x="340" y="342" width="500" height="109" rx="9"></rect>
+  <text id="kong-apiops--relationship--production" class="apio-cluster-label runtime" x="352" y="365">本番の実行環境</text>
+  <g class="apio-link apio-human" data-emphasis="configuration">
+    <path class="apio-line" d="M452 47 L153 47 L153 145"></path>
+    <polygon class="apio-tip" points="153.00,145.00 149.09,136.90 156.91,136.90"></polygon>
+    <text id="kong-apiops--relationship--link-1" class="apio-link-label" x="302" y="43">基盤側のPRを承認</text>
+  </g>
+  <g class="apio-link apio-human" data-emphasis="configuration">
+    <path class="apio-line" d="M96 372 L96 275"></path>
+    <polygon class="apio-tip" points="96.00,275.00 99.91,283.10 92.09,283.10"></polygon>
+    <text id="kong-apiops--relationship--link-2" class="apio-link-label" x="58" y="331">変更のPR</text>
+  </g>
+  <g class="apio-link apio-human" data-emphasis="context">
+    <path class="apio-line" d="M176 372 L176 275"></path>
+    <polygon class="apio-tip" points="176.00,275.00 179.91,283.10 172.09,283.10"></polygon>
+    <text id="kong-apiops--relationship--link-3" class="apio-link-label" x="221" y="331">公開を承認</text>
+  </g>
+  <g class="apio-link apio-automation" data-emphasis="context">
+    <path class="apio-line" d="M244 172 L294 172 L294 142 L570 142 L570 184 L608 184"></path>
+    <polygon class="apio-tip" points="608.00,184.00 599.90,187.91 599.90,180.09"></polygon>
+    <text id="kong-apiops--relationship--link-4" class="apio-link-label" x="512" y="137">仕様を登録（本番反映後）</text>
+  </g>
+  <g class="apio-link apio-automation" data-emphasis="configuration">
+    <path class="apio-line" d="M244 206 L365 206"></path>
+    <polygon class="apio-tip" points="365.00,206.00 356.90,209.91 356.90,202.09"></polygon>
+    <text id="kong-apiops--relationship--link-5" class="apio-link-label" x="304" y="201">設定を直接反映</text>
+  </g>
+  <g class="apio-link apio-automation" data-emphasis="context">
+    <path class="apio-line" d="M699 217 L699 236"></path>
+    <polygon class="apio-tip" points="699.00,236.00 695.09,227.90 702.91,227.90"></polygon>
+    <text id="kong-apiops--relationship--link-6" class="apio-link-label" x="725" y="232">公開</text>
+  </g>
+  <g class="apio-link apio-automation" data-emphasis="context">
+    <path class="apio-line" d="M452 228 L452 318 L714 318 L714 374"></path>
+    <polygon class="apio-tip" points="714.00,374.00 710.09,365.90 717.91,365.90"></polygon>
+    <text id="kong-apiops--relationship--link-7" class="apio-link-label" x="580" y="313">Gatewayへ設定を配布</text>
+  </g>
+  <g class="apio-link apio-human" data-emphasis="access">
+    <path class="apio-line" d="M897 248 L792 248"></path>
+    <polygon class="apio-tip" points="792.00,248.00 800.10,244.09 800.10,251.91"></polygon>
+    <text id="kong-apiops--relationship--link-8" class="apio-link-label" x="844" y="244">発見・利用申請</text>
+  </g>
+  <g class="apio-link apio-human" data-emphasis="access">
+    <path class="apio-line" d="M792 272 L897 272"></path>
+    <polygon class="apio-tip" points="897.00,272.00 888.90,275.91 888.90,268.09"></polygon>
+    <text id="kong-apiops--relationship--link-9" class="apio-link-label" x="844" y="268">承認後にキー取得</text>
+  </g>
+  <g class="apio-link apio-human" data-emphasis="access">
+    <path class="apio-line" d="M991 288 L991 374"></path>
+    <polygon class="apio-tip" points="991.00,374.00 987.09,365.90 994.91,365.90"></polygon>
+    <text id="kong-apiops--relationship--link-10" class="apio-link-label" x="1035" y="332">キーを設定</text>
+  </g>
+  <g class="apio-link apio-traffic" data-emphasis="access">
+    <path class="apio-line" d="M897 394 L807 394"></path>
+    <polygon class="apio-tip" points="807.00,394.00 815.10,390.09 815.10,397.91"></polygon>
+    <text id="kong-apiops--relationship--link-11" class="apio-link-label" x="852" y="390">キー付き要求</text>
+  </g>
+  <g class="apio-link apio-traffic" data-emphasis="access">
+    <path class="apio-line" d="M625 394 L546 394"></path>
+    <polygon class="apio-tip" points="546.00,394.00 554.10,390.09 554.10,397.91"></polygon>
+    <text id="kong-apiops--relationship--link-12" class="apio-link-label" x="585" y="390">転送</text>
+  </g>
+  <g class="apio-link apio-traffic" data-emphasis="access">
+    <path class="apio-line" d="M546 420 L625 420"></path>
+    <polygon class="apio-tip" points="625.00,420.00 616.90,423.91 616.90,416.09"></polygon>
+    <text id="kong-apiops--relationship--link-13" class="apio-link-label" x="585" y="416">APIの応答</text>
+  </g>
+  <g class="apio-link apio-traffic" data-emphasis="access">
+    <path class="apio-line" d="M807 420 L897 420"></path>
+    <polygon class="apio-tip" points="897.00,420.00 888.90,423.91 888.90,416.09"></polygon>
+    <text id="kong-apiops--relationship--link-14" class="apio-link-label" x="852" y="416">APIの応答</text>
+  </g>
+  <g class="apio-node apio-actor" data-emphasis="configuration">
+    <rect x="452" y="8" width="270" height="70" rx="7"></rect>
+    <text id="kong-apiops--relationship--operator-1" class="apio-node-name" x="462" y="40.0">プラットフォーム運用者</text>
+    <text id="kong-apiops--relationship--operator-2" class="apio-node-note" x="462" y="57.0">本番Gatewayと共通ルールを管理</text>
+  </g>
+  <g class="apio-node apio-actor" data-emphasis="configuration">
+    <rect x="18" y="372" width="226" height="68" rx="7"></rect>
+    <text id="kong-apiops--relationship--producer-1" class="apio-node-name" x="28" y="403.0">API提供者</text>
+    <text id="kong-apiops--relationship--producer-2" class="apio-node-note" x="28" y="420.0">API仕様とサービスを管理</text>
+  </g>
+  <g class="apio-node apio-actor" data-emphasis="access">
+    <rect x="897" y="218" width="190" height="70" rx="7"></rect>
+    <text id="kong-apiops--relationship--consumer-1" class="apio-node-name" x="907" y="250.0">API利用者</text>
+    <text id="kong-apiops--relationship--consumer-2" class="apio-node-note" x="907" y="267.0">仕様確認・利用申請</text>
+  </g>
+  <g class="apio-node apio-base" data-emphasis="configuration">
+    <rect x="18" y="145" width="226" height="130" rx="7"></rect>
+    <text id="kong-apiops--relationship--git-1" class="apio-node-name" x="28" y="191.0">Git・CI/CD</text>
+    <text id="kong-apiops--relationship--git-2" class="apio-node-note" x="28" y="208.0">サービス側で変更を検査</text>
+    <text id="kong-apiops--relationship--git-3" class="apio-node-note" x="28" y="225.0">検証結果と差分をPRに返す</text>
+    <text id="kong-apiops--relationship--git-4" class="apio-node-note" x="28" y="242.0">基盤側は承認済みの設定を適用</text>
+  </g>
+  <g class="apio-node apio-base" data-emphasis="configuration">
+    <rect x="365" y="173" width="180" height="55" rx="7"></rect>
+    <text id="kong-apiops--relationship--control-plane-1" class="apio-node-name" x="375" y="197.5">Control Plane</text>
+    <text id="kong-apiops--relationship--control-plane-2" class="apio-node-note" x="375" y="214.5">Gatewayの構成を管理</text>
+  </g>
+  <g class="apio-node apio-base" data-emphasis="context">
+    <rect x="608" y="159" width="184" height="58" rx="7"></rect>
+    <text id="kong-apiops--relationship--catalog-1" class="apio-node-name" x="618" y="185.0">Catalog</text>
+    <text id="kong-apiops--relationship--catalog-2" class="apio-node-note" x="618" y="202.0">API仕様と実装の参照を管理</text>
+  </g>
+  <g class="apio-node apio-base" data-emphasis="access">
+    <rect x="608" y="236" width="184" height="51" rx="7"></rect>
+    <text id="kong-apiops--relationship--portal-1" class="apio-node-name" x="618" y="258.5">Dev Portal</text>
+    <text id="kong-apiops--relationship--portal-2" class="apio-node-note" x="618" y="275.5">仕様確認・利用登録の入口</text>
+  </g>
+  <g class="apio-node apio-runtime" data-emphasis="access">
+    <rect x="364" y="374" width="182" height="60" rx="7"></rect>
+    <text id="kong-apiops--relationship--service-1" class="apio-node-name" x="374" y="401.0">APIサービス</text>
+    <text id="kong-apiops--relationship--service-2" class="apio-node-note" x="374" y="418.0">APIの応答を返す</text>
+  </g>
+  <g class="apio-node apio-runtime" data-emphasis="access">
+    <rect x="625" y="374" width="182" height="60" rx="7"></rect>
+    <text id="kong-apiops--relationship--gateway-1" class="apio-node-name" x="635" y="401.0">Kong Gateway</text>
+    <text id="kong-apiops--relationship--gateway-2" class="apio-node-note" x="635" y="418.0">APIの呼び出し先</text>
+  </g>
+  <g class="apio-node apio-runtime" data-emphasis="access">
+    <rect x="897" y="374" width="190" height="60" rx="7"></rect>
+    <text id="kong-apiops--relationship--app-1" class="apio-node-name" x="907" y="401.0">利用アプリ</text>
+    <text id="kong-apiops--relationship--app-2" class="apio-node-note" x="907" y="418.0">取得したキーでAPIを呼ぶ</text>
+  </g>
+</svg>
+      <p class="apio-legend">実線：人の操作・承認またはAPI通信　破線：設定・公開の自動化</p>
+    </div>
+    <div class="source-note"><a href="https://developer.konghq.com/konnect-reference-platform/apiops/" target="_blank" rel="noopener noreferrer">KongのAPIOps実装例</a></div>
+  </div>
+</section>
+
+<section id="kong-apiops--delivery--delivery" data-page="delivery" data-tab="本番反映・公開" data-title="変更を本番へ届けAPIを公開する">
+  <div class="page pilot-page apio-page apio-delivery">
+    <div class="eyebrow">14 / KONG APIOPS</div>
+    <h2 id="kong-apiops--delivery--heading">変更を本番へ届けAPIを公開する</h2>
+    <p id="kong-apiops--delivery--lead" class="subtitle">API提供チームとプラットフォーム運用者が、それぞれの変更を確認する。</p>
+    <div class="pilot-main apio-stage-body" data-controller data-stepper data-default-state="s1">
+<p id="kong-apiops--delivery--delivery-lane" class="apio-lane">Gitの変更提案（PR）から本番反映と公開まで</p><div class="apio-flow apio-flow-5 ">
+      <div class="apio-flow-node" data-apio-stage data-active-in="s1" data-done-in="s2 s3 s4 s5"><strong id="kong-apiops--delivery--delivery-service-label">サービスPR</strong><small id="kong-apiops--delivery--delivery-service-note-1">API提供チームが提案</small></div>
+      <div class="apio-flow-edge" data-apio-stage data-active-in="s2" data-done-in="s3 s4 s5"><span id="kong-apiops--delivery--delivery-development-edge-label">レビュー済み</span></div>
+      <div class="apio-flow-node" data-apio-stage data-active-in="s2" data-done-in="s3 s4 s5"><strong id="kong-apiops--delivery--delivery-development-label">開発環境</strong><small id="kong-apiops--delivery--delivery-development-note-1">CI/CDで反映・動作確認</small></div>
+      <div class="apio-flow-edge" data-apio-stage data-active-in="s3" data-done-in="s4 s5"><span id="kong-apiops--delivery--delivery-release-label">リリース候補</span></div>
+      <div class="apio-flow-node" data-apio-stage data-waiting-in="s3" data-done-in="s4 s5"><strong id="kong-apiops--delivery--delivery-platform-label">基盤側のPR</strong><small id="kong-apiops--delivery--delivery-platform-note-1">運用者が反映を承認</small></div>
+      <div class="apio-flow-edge" data-apio-stage data-active-in="s4" data-done-in="s5"><span id="kong-apiops--delivery--delivery-apply-label">承認済み設定</span></div>
+      <div class="apio-flow-node" data-apio-stage data-active-in="s4" data-done-in="s5"><strong id="kong-apiops--delivery--delivery-gateway-label">本番Gateway</strong><small id="kong-apiops--delivery--delivery-gateway-note-1">CI/CDがdecKで反映</small></div>
+      <div class="apio-flow-edge" data-apio-stage data-active-in="s4 s5"><span id="kong-apiops--delivery--delivery-publish-label">反映成功</span></div>
+      <div class="apio-flow-node" data-apio-stage data-waiting-in="s4" data-active-in="s5"><strong id="kong-apiops--delivery--delivery-catalog-label">Catalog・Dev Portal</strong><small id="kong-apiops--delivery--delivery-catalog-note-1">提供チームが公開を承認</small></div>
+    </div><div class="apio-stage-row"><div class="apio-stage-copy" aria-live="polite"><div data-state-item="s1"><h3 id="kong-apiops--delivery--s1-title">API提供チームが変更を提案</h3><p id="kong-apiops--delivery--s1-description">APIの追加や仕様変更をサービス側のPRで提案する。CI/CDが仕様を検査し、生成したGateway設定の差分をPRに載せる。</p></div><div data-state-item="s2" hidden><h3 id="kong-apiops--delivery--s2-title">開発環境で確かめ、リリース候補を選ぶ</h3><p id="kong-apiops--delivery--s2-description">サービス側のレビューとマージ後、CI/CDが開発環境に設定を反映する。API提供チームが動作を確かめ、本番に届けるリリースを選ぶ。</p></div><div data-state-item="s3" hidden><h3 id="kong-apiops--delivery--s3-title">本番への反映を運用者が承認</h3><p id="kong-apiops--delivery--s3-description">リリース候補の設定を基盤側のPRに渡す。プラットフォーム運用者が共通ルールへの適合を確認し、本番Gatewayへの反映を承認する。</p></div><div data-state-item="s4" hidden><h3 id="kong-apiops--delivery--s4-title">本番Gatewayへ反映し、公開承認を待つ</h3><p id="kong-apiops--delivery--s4-description">CI/CDがdecKでKonnectのControl Planeに設定を適用する。本番Gatewayへの反映が成功したら、API提供チームが公開を承認する。</p></div><div data-state-item="s5" hidden><h3 id="kong-apiops--delivery--s5-title">同じリリースの仕様をDev Portalで公開</h3><p id="kong-apiops--delivery--s5-description">公開承認後、CI/CDがkongctlでCatalogのAPI仕様と実装の参照を更新し、Dev Portalへ公開する。対象の仕様が利用者に表示されることを確認する。</p></div></div><div class="apio-stage-actions"><div class="choice-row apio-choices" role="group" aria-label="シーン選択"><button id="kong-apiops--delivery--choose-s1" type="button" data-state-choice="s1" aria-pressed="true">1</button><button id="kong-apiops--delivery--choose-s2" type="button" data-state-choice="s2" aria-pressed="false">2</button><button id="kong-apiops--delivery--choose-s3" type="button" data-state-choice="s3" aria-pressed="false">3</button><button id="kong-apiops--delivery--choose-s4" type="button" data-state-choice="s4" aria-pressed="false">4</button><button id="kong-apiops--delivery--choose-s5" type="button" data-state-choice="s5" aria-pressed="false">5</button></div><button type="button" class="apio-replay" data-step-replay>再演</button></div></div>
+    </div>
+    <div class="source-note"><a href="https://developer.konghq.com/konnect-reference-platform/apiops/" target="_blank" rel="noopener noreferrer">KongのAPIOps実装例</a> · <a href="https://developer.konghq.com/kongctl/kongctl-and-deck/" target="_blank" rel="noopener noreferrer">kongctlとdecK</a></div>
+  </div>
+</section>
+
+<section id="kong-apiops--consumption--consumption" data-page="consumption" data-tab="APIの利用" data-title="公開されたAPIを見つけて使う">
+  <div class="page pilot-page apio-page apio-consumption">
+    <div class="eyebrow">14 / KONG APIOPS</div>
+    <h2 id="kong-apiops--consumption--heading">公開されたAPIを見つけて使う</h2>
+    <p id="kong-apiops--consumption--lead" class="subtitle">Dev Portalで仕様を確認し、アプリからKong Gatewayを経由して呼び出す。</p>
+    <div class="pilot-main apio-stage-body" data-controller data-stepper data-default-state="s1">
+<p id="kong-apiops--consumption--discovery-lane" class="apio-lane">仕様の確認と利用登録</p><div class="apio-flow apio-flow-3 ">
+      <div class="apio-flow-node" data-apio-stage data-active-in="s1" data-done-in="s2 s3"><strong id="kong-apiops--consumption--consumer-label">API利用者</strong><small id="kong-apiops--consumption--consumer-note-1">自分のアプリに必要なAPIを探す</small></div>
+      <div class="apio-flow-edge" data-apio-stage data-active-in="s1" data-done-in="s2 s3"><span id="kong-apiops--consumption--consumer-discover-label">APIを探す</span></div>
+      <div class="apio-flow-node" data-apio-stage data-active-in="s1 s2" data-done-in="s3"><strong id="kong-apiops--consumption--consumer-portal-label">Konnect Dev Portal</strong><small id="kong-apiops--consumption--consumer-portal-note-1">仕様を確認し、アプリを登録</small></div>
+      <div class="apio-flow-edge" data-apio-stage data-active-in="s2" data-done-in="s3"><span id="kong-apiops--consumption--consumer-register-label">利用申請・承認</span></div>
+      <div class="apio-flow-node" data-apio-stage data-active-in="s2" data-done-in="s3"><strong id="kong-apiops--consumption--consumer-key-label">アプリケーションキー</strong><small id="kong-apiops--consumption--consumer-key-note-1">承認後に取得</small></div>
+    </div><p id="kong-apiops--consumption--runtime-lane" class="apio-lane">APIリクエストと応答</p><div class="apio-flow apio-flow-3 apio-traffic-flow">
+      <div class="apio-flow-node" data-apio-stage data-active-in="s3"><strong id="kong-apiops--consumption--consumer-app-label">利用アプリ</strong><small id="kong-apiops--consumption--consumer-app-note-1">取得したキーでAPIを呼ぶ</small></div>
+      <div class="apio-flow-edge apio-roundtrip" data-apio-stage data-active-in="s3"><span id="kong-apiops--consumption--consumer-request-label">キー付きリクエスト</span><span id="kong-apiops--consumption--consumer-request-response" class="apio-flow-response">APIの応答</span></div>
+      <div class="apio-flow-node" data-apio-stage data-active-in="s3"><strong id="kong-apiops--consumption--consumer-gateway-label">Kong Gateway</strong><small id="kong-apiops--consumption--consumer-gateway-note-1">リクエストを認証</small></div>
+      <div class="apio-flow-edge apio-roundtrip" data-apio-stage data-active-in="s3"><span id="kong-apiops--consumption--consumer-forward-label">リクエスト転送</span><span id="kong-apiops--consumption--consumer-forward-response" class="apio-flow-response">APIの応答</span></div>
+      <div class="apio-flow-node" data-apio-stage data-active-in="s3"><strong id="kong-apiops--consumption--consumer-service-label">APIサービス</strong><small id="kong-apiops--consumption--consumer-service-note-1">APIの応答をGateway経由で返す</small></div>
+    </div><div class="apio-stage-row"><div class="apio-stage-copy" aria-live="polite"><div data-state-item="s1"><h3 id="kong-apiops--consumption--s1-title">Dev Portalで操作の仕様を確認</h3><p id="kong-apiops--consumption--s1-description">API利用者が必要なAPIを見つけ、呼び出しに必要な入力と、返ってくる応答を仕様で確認する。</p></div><div data-state-item="s2" hidden><h3 id="kong-apiops--consumption--s2-title">アプリを登録し、承認後にキーを取得</h3><p id="kong-apiops--consumption--s2-description">Dev Portalで利用するアプリを登録し、APIへのアクセスを申請する。承認後、利用者がアプリケーションキーを取得する。</p></div><div data-state-item="s3" hidden><h3 id="kong-apiops--consumption--s3-title">アプリからAPIを呼び出す</h3><p id="kong-apiops--consumption--s3-description">利用アプリがキー付きのリクエストをKong Gatewayへ送る。Gatewayが認証してAPIサービスに転送し、応答がアプリへ戻る。最初の呼び出しで応答を確かめる。</p></div></div><div class="apio-stage-actions"><div class="choice-row apio-choices" role="group" aria-label="シーン選択"><button id="kong-apiops--consumption--choose-s1" type="button" data-state-choice="s1" aria-pressed="true">1</button><button id="kong-apiops--consumption--choose-s2" type="button" data-state-choice="s2" aria-pressed="false">2</button><button id="kong-apiops--consumption--choose-s3" type="button" data-state-choice="s3" aria-pressed="false">3</button></div><button type="button" class="apio-replay" data-step-replay>再演</button></div></div>
+    </div>
+    <div class="source-note"><a href="https://developer.konghq.com/konnect-reference-platform/apiops/#connect-publication-to-api-consumption" target="_blank" rel="noopener noreferrer">公開からAPI利用まで</a></div>
+  </div>
+</section>
+
+<section id="kong-apiops--ai--ai" data-page="ai" data-tab="AI駆動運用" data-title="AIエージェントをAPI運用に組み込む">
+  <div class="page pilot-page apio-page apio-ai">
+    <div class="eyebrow">14 / KONG APIOPS</div>
+    <h2 id="kong-apiops--ai--heading">AIエージェントをAPI運用に組み込む</h2>
+    <p id="kong-apiops--ai--lead" class="subtitle">担当者が目的と対象環境を指定し、エージェントが共通手順を使って構成の調査と変更の準備を進める。</p>
+    <div class="pilot-main apio-ai-body">
+<svg class="apio-diagram" viewbox="0 0 1100 310" role="img" aria-labelledby="kong-apiops--ai--diagram-title kong-apiops--ai--diagram-description">
+  <title id="kong-apiops--ai--diagram-title">AI駆動運用の関係図</title>
+  <desc id="kong-apiops--ai--diagram-description">Kong Skills Hubと社内の手順をエージェントが参照する。CLI・MCPでKonnectの状態を照会し、Gitに差分と検証結果を出す。CI/CDは人が承認した変更を適用する。</desc>
+  <g class="apio-link apio-human">
+    <path class="apio-line" d="M260 79 L320 79 L320 130 L391 130"></path>
+    <polygon class="apio-tip" points="391.00,130.00 382.90,133.91 382.90,126.09"></polygon>
+    <text id="kong-apiops--ai--link-1" class="apio-link-label" x="296" y="74">製品の手順</text>
+  </g>
+  <g class="apio-link apio-human">
+    <path class="apio-line" d="M260 231 L320 231 L320 181 L391 181"></path>
+    <polygon class="apio-tip" points="391.00,181.00 382.90,184.91 382.90,177.09"></polygon>
+    <text id="kong-apiops--ai--link-2" class="apio-link-label" x="295" y="226">組織の手順</text>
+  </g>
+  <g class="apio-link apio-traffic">
+    <path class="apio-line" d="M691 126 L752 126 L752 62 L835 62"></path>
+    <polygon class="apio-tip" points="835.00,62.00 826.90,65.91 826.90,58.09"></polygon>
+    <text id="kong-apiops--ai--link-3" class="apio-link-label" x="783" y="57">CLI・MCPで照会</text>
+  </g>
+  <g class="apio-link apio-traffic">
+    <path class="apio-line" d="M835 105 L782 105 L782 154 L691 154"></path>
+    <polygon class="apio-tip" points="691.00,154.00 699.10,150.09 699.10,157.91"></polygon>
+    <text id="kong-apiops--ai--link-4" class="apio-link-label" x="746" y="150">構成・公開状態</text>
+  </g>
+  <g class="apio-link apio-human">
+    <path class="apio-line" d="M691 181 L760 181 L760 232 L835 232"></path>
+    <polygon class="apio-tip" points="835.00,232.00 826.90,235.91 826.90,228.09"></polygon>
+    <text id="kong-apiops--ai--link-5" class="apio-link-label" x="770" y="222">差分・検証結果をPRへ</text>
+  </g>
+  <g class="apio-link apio-automation">
+    <path class="apio-line" d="M950 182 L950 128"></path>
+    <polygon class="apio-tip" points="950.00,128.00 953.91,136.10 946.09,136.10"></polygon>
+    <text id="kong-apiops--ai--link-6" class="apio-link-label" x="1003" y="159">承認後に反映</text>
+  </g>
+  <g class="apio-node apio-base">
+    <rect x="20" y="30" width="240" height="98" rx="7"></rect>
+    <text id="kong-apiops--ai--skills-1" class="apio-node-name" x="30" y="68.0">Kong Skills Hub</text>
+    <text id="kong-apiops--ai--skills-2" class="apio-node-note" x="30" y="85.0">Kong製品の操作・検証手順</text>
+    <text id="kong-apiops--ai--skills-3" class="apio-node-note" x="30" y="102.0">設定の原則とサンプル</text>
+  </g>
+  <g class="apio-node apio-base">
+    <rect x="20" y="182" width="240" height="98" rx="7"></rect>
+    <text id="kong-apiops--ai--internal-1" class="apio-node-name" x="30" y="220.0">社内Skill・Markdown</text>
+    <text id="kong-apiops--ai--internal-2" class="apio-node-note" x="30" y="237.0">基盤チームが整備・更新</text>
+    <text id="kong-apiops--ai--internal-3" class="apio-node-note" x="30" y="254.0">共通ルール・障害対応・復旧手順</text>
+  </g>
+  <g class="apio-node apio-agent">
+    <rect x="391" y="104" width="300" height="100" rx="7"></rect>
+    <text id="kong-apiops--ai--agent-1" class="apio-node-name" x="401" y="143.0">Claude Code / Codex</text>
+    <text id="kong-apiops--ai--agent-2" class="apio-node-note" x="401" y="160.0">目的と対象環境に合う手順を選ぶ</text>
+    <text id="kong-apiops--ai--agent-3" class="apio-node-note" x="401" y="177.0">調査結果・変更案・検証結果を用意</text>
+  </g>
+  <g class="apio-node apio-base">
+    <rect x="835" y="30" width="245" height="98" rx="7"></rect>
+    <text id="kong-apiops--ai--konnect-1" class="apio-node-name" x="845" y="68.0">Konnect</text>
+    <text id="kong-apiops--ai--konnect-2" class="apio-node-note" x="845" y="85.0">Gateway構成・APIの公開状態</text>
+    <text id="kong-apiops--ai--konnect-3" class="apio-node-note" x="845" y="102.0">許可された環境と権限で照会</text>
+  </g>
+  <g class="apio-node apio-base">
+    <rect x="835" y="182" width="245" height="98" rx="7"></rect>
+    <text id="kong-apiops--ai--ci-1" class="apio-node-name" x="845" y="220.0">Git・CI/CD</text>
+    <text id="kong-apiops--ai--ci-2" class="apio-node-note" x="845" y="237.0">人がPRで差分と検証結果を確認</text>
+    <text id="kong-apiops--ai--ci-3" class="apio-node-note" x="845" y="254.0">承認した変更をCI/CDで適用</text>
+  </g>
+</svg><div class="apio-cases" role="group" aria-label="チームごとのAI活用例"><div><strong id="kong-apiops--ai--provider-title">API提供チーム</strong><p id="kong-apiops--ai--provider-copy">仕様・設定案の作成、契約テストの準備</p></div><div><strong id="kong-apiops--ai--consumer-title">API利用チーム</strong><p id="kong-apiops--ai--consumer-copy">公開APIの探索、接続試験の準備</p></div><div><strong id="kong-apiops--ai--platform-title">基盤チーム</strong><p id="kong-apiops--ai--platform-copy">設定差や公開状態の調査、対応案の作成</p></div></div><div class="apio-strip"><strong id="kong-apiops--ai--outcome-label">調査の知見を次の運用へ</strong><p id="kong-apiops--ai--outcome">調査や復旧で得た知見をPRで共有し、基盤チームのレビューを経て社内SkillやMarkdownに反映する。</p></div>
+    </div>
+    <div class="source-note"><a href="https://developer.konghq.com/skills/" target="_blank" rel="noopener noreferrer">Kong Skills Hub</a> · <a href="https://developer.konghq.com/skills/install/" target="_blank" rel="noopener noreferrer">スキルと接続の設定</a></div>
+  </div>
+</section>
 </section>
 
 </main></div>
@@ -1893,7 +2290,7 @@ function animationCopy(root){
     scrollActivationWidth:null,postMessage:false,
     mouseWheel:false,touch:false,
     keyboardCondition:event=>!interactive(event),
-    keyboard:{37:()=>horizontal(-1),39:()=>horizontal(1),38:()=>previous(),40:()=>next(),33:()=>previous(),34:()=>next(),32:()=>next(),82:()=>current()?.replay()},
+    keyboard:{37:()=>horizontal(-1),39:()=>horizontal(1),38:()=>previous(),40:()=>next(),33:()=>previous(),34:()=>next(),32:()=>next(),82:()=>(current()??currentStepper())?.replay()},
   });
   const position=()=>{
     const raw=deck.getIndices();
@@ -1904,17 +2301,19 @@ function animationCopy(root){
   const go=(h,v=0)=>vertical?deck.slide(0,h?flat.indexOf(columns[h-1].children[v]):0):deck.slide(h,v);
   function horizontal(delta){if(vertical)return;const {h}=position();go(Math.max(0,Math.min(columns.length,h+delta)));}
   const start=()=>go(Math.max(1,position().h));
-  const animations=new Map();let ready=false,activePage=null;
+  const animations=new Map(),steppers=new Map();let ready=false,activePage=null;
   document.querySelectorAll('[data-animation]').forEach(page=>{
     const mounts={connectivity:mountConnectivity,gateway:mountGateway,'context-mcp':mountP1};
     animations.set(page,mounts[page.dataset.animation](page,()=>queueMicrotask(()=>{if(ready)update();})));
   });
   function currentPage(){return deck.getCurrentSlide();}
   function current(){return animations.get(currentPage());}
+  function currentStepper(){return steppers.get(currentPage());}
   function next(){
     const animation=current(),state=animation?.getState();
     if(state?.busy)return;
     if(state&&state.step<state.count-1){animation.next();return;}
+    if(currentStepper()?.move(1))return;
     const {h,v}=position();
     if(!vertical&&(h===0||v===columns[h-1].children.length-1)){start();return;}
     if(vertical&&h===columns.length&&v===columns[h-1].children.length-1){go(0);return;}
@@ -1923,6 +2322,7 @@ function animationCopy(root){
   function previous(){
     const animation=current(),state=animation?.getState();
     if(state?.step>0){animation.previous();return;}
+    if(currentStepper()?.move(-1))return;
     animation?.cancel();deck.up();
   }
   const sceneSelect=document.querySelector('[data-scene-select]');
@@ -1934,7 +2334,7 @@ function animationCopy(root){
   let wheelTime=0,wheelTotal=0,wheelUsed=false;
   const viewport=document.querySelector('.reveal');
   viewport.addEventListener('wheel',event=>{
-    if(!vertical&&!current())return;
+    if(!vertical&&!current()&&!currentStepper())return;
     event.preventDefault();if(interactive(event))return;
     const now=performance.now();if(now-wheelTime>240){wheelTotal=0;wheelUsed=false;}
     wheelTime=now;wheelTotal+=event.deltaY*(event.deltaMode===1?16:1);
@@ -1948,7 +2348,7 @@ function animationCopy(root){
     else if(!vertical&&Math.abs(dx)>60)horizontal(dx>0?1:-1);
   },{passive:true});
   // Read-only inspection for browser verification; no second input controller.
-  window.kongSlides={getState:()=>({page:currentPage()?.id,...(current()?.getState()||{})})};
+  window.kongSlides={getState:()=>({page:currentPage()?.id,...(current()?.getState()||currentStepper()?.getState()||{})})};
   const select=(controller,state)=>{
     controller.dataset.currentState=state;
     controller.querySelectorAll('[data-state-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.stateChoice===state)));
@@ -1957,9 +2357,47 @@ function animationCopy(root){
     controller.querySelectorAll('[data-emphasis]').forEach(el=>el.dataset.dim=String(state!=='all' && el.dataset.emphasis!==state));
   };
   document.querySelectorAll('[data-controller]').forEach(controller=>{
-    controller.querySelectorAll('[data-state-choice]').forEach(button=>button.addEventListener('click',()=>select(controller,button.dataset.stateChoice)));
-    controller.querySelectorAll('[data-state-reset]').forEach(button=>button.addEventListener('click',()=>select(controller,controller.dataset.defaultState)));
-    select(controller,controller.dataset.defaultState);
+    const choices=[...controller.querySelectorAll('[data-state-choice]')];
+    const sequential=controller.hasAttribute('data-stepper');
+    const states=choices.map(button=>button.dataset.stateChoice);
+    const stageItems=[...controller.querySelectorAll('[data-apio-stage]')];
+    const replay=controller.querySelector('[data-step-replay]');
+    const statuses=['active','waiting','done'];
+    function show(state,animate=false){
+      select(controller,state);
+      if(!sequential)return;
+      controller.removeAttribute('data-playing-step');
+      for(const item of stageItems){
+        const status=statuses.find(name=>item.dataset[name+'In']?.split(' ').includes(state));
+        if(status)item.dataset.stageStatus=status;
+        else delete item.dataset.stageStatus;
+      }
+      if(replay)replay.disabled=state===states[0];
+      if(animate&&stageItems.length){
+        controller.getBoundingClientRect();
+        controller.setAttribute('data-playing-step','');
+      }
+      if(ready)update();
+    }
+    choices.forEach(button=>button.addEventListener('click',()=>show(button.dataset.stateChoice)));
+    controller.querySelectorAll('[data-state-reset]').forEach(button=>button.addEventListener('click',()=>show(controller.dataset.defaultState)));
+    if(sequential){
+      const getState=()=>({step:states.indexOf(controller.dataset.currentState),count:states.length});
+      const play=()=>{if(replay&&!replay.disabled)show(controller.dataset.currentState,true);};
+      replay?.addEventListener('click',play);
+      steppers.set(controller.closest('[data-page]'),{
+        getState,
+        move(direction){
+          const target=states[getState().step+direction];
+          if(!target)return false;
+          show(target,direction>0);
+          return true;
+        },
+        replay:play,
+        cancel:()=>controller.removeAttribute('data-playing-step'),
+      });
+    }
+    show(controller.dataset.defaultState);
   });
   // Preserve the accepted introduction's three-role interaction in combined decks.
   const platform=document.querySelector('[data-story="kong-overview"] [data-page="platform"], [data-story="kong-overview"][data-page="platform"]');
@@ -1992,7 +2430,7 @@ function animationCopy(root){
   });
   function update(){
     if(activePage!==currentPage()){
-      animations.get(activePage)?.cancel();activePage=currentPage();
+      animations.get(activePage)?.cancel();steppers.get(activePage)?.cancel();activePage=currentPage();
     }
     const animation=current(),state=animation?.getState();
     const controls=document.querySelector('[data-animation-controls]');controls.hidden=!animation;
@@ -2032,6 +2470,13 @@ function animationCopy(root){
       const label=state.step<state.count-1?'次のシーンへ':vertical?'次のページへ':'概要に戻る';
       next.textContent=state.step<state.count-1||vertical?'↓':'↥';
       next.setAttribute('aria-label',label);document.querySelector('[data-nav-label]').textContent=state.step<state.count-1?'シーン':vertical?'次へ':'概要に戻る';
+    }
+    const stepState=currentStepper()?.getState();
+    document.querySelector('[data-up]').setAttribute('aria-label',stepState?.step>0?'前のシーンへ':'前の詳細へ');
+    if(stepState&&stepState.step<stepState.count-1){
+      next.textContent='↓';
+      next.setAttribute('aria-label','次のシーンへ');
+      document.querySelector('[data-nav-label]').textContent='シーン';
     }
     const tabs=document.querySelector('[data-page-tabs]');tabs.replaceChildren();
     if(h>0) [...column.children].forEach((item,i)=>{
