@@ -984,10 +984,394 @@ html[data-theme="light"] .apio-page{--apio-focus:#3b6234;--apio-traffic:#0c6d57;
 
 [data-animation-root="context-mcp"]{position:absolute;inset:auto;left:94px;top:62px;width:1400px;height:760px;transform:scale(.78);transform-origin:top left;background:transparent}
 [data-animation-root="context-mcp"] [data-motion-svg]{width:1400px;height:760px;max-height:none}
+
+/* Fixed topology. Only token markers move inside the shared slide frame. */
+.tv-overview .pilot-main.hero-split h1 {
+  font-size: 39px;
+  line-height: 1.35;
+  line-break: strict;
+}
+.tv-overview .pilot-main.hero-split .lead { margin-top: 14px; }
+.tv-page h2 { font-size: 37px; }
+.tv-main {
+  overflow: hidden;
+  border-block: 1px solid #465b47;
+  background-color: #0d1b13;
+  background-image:
+    linear-gradient(90deg, #536b3d24 1px, transparent 1px),
+    linear-gradient(#536b3d24 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.tv-diagram { display: block; width: 100%; height: 100%; }
+.tv-diagram text {
+  fill: #e8f0e6;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+}
+.tv-node > text, .tv-row text, .tv-chip text { text-anchor: middle; }
+.tv-node > rect { fill: #15241a; stroke: #6c826c; stroke-width: 1.5px; }
+.tv-node.tv-agent > rect { fill: #172b1d; }
+.tv-node.tv-gateway > rect { fill: #243523; }
+.tv-node.tv-gateway > text:first-of-type { font-size: 24px; }
+.tv-node .tv-small, .tv-row text { fill: #cdd4cb; font-size: 13.5px; }
+.tv-node.tv-active > rect { stroke: #ccff00; stroke-width: 2px; }
+.tv-row rect { fill: #0a170f; stroke: #586d57; }
+.tv-row.tv-active rect { fill: #293e0d; stroke: #ccff00; }
+.tv-row.tv-active text { fill: #e5ff79; }
+.tv-route { fill: none; stroke: #728574; stroke-width: 2px; stroke-dasharray: 5 5; }
+.tv-route.tv-active { stroke: #ccff00; stroke-dasharray: none; }
+/* Risk demonstration and the two close-ups share the same slide canvas. */
+.tv-risk-diagram:not([data-tv-mode="compromised"]) .tv-risk-attack { visibility: hidden; }
+.tv-risk-diagram[data-tv-mode="compromised"] .tv-risk-normal { opacity: .16; }
+.tv-risk-diagram .tv-route.tv-active { stroke-width: 3px; }
+.tv-risk-diagram .tv-node > text:first-of-type { font-size: 21px; }
+.tv-risk-summary rect, .tv-results rect, .tv-exchange-note rect { fill: #11251a; stroke: #536a54; }
+.tv-risk-summary text { font-size: 17px; }
+.tv-risk-summary .tv-small { font-size: 13px; fill: #cdd4cb; }
+.tv-station { fill: none; stroke: none; }
+.tv-results text { font-size: 16px; }
+.tv-results .tv-results-heading { font-size: 13px; fill: #ccff00; }
+.tv-diagram[data-tv-results="0"] .tv-results,
+.tv-diagram[data-tv-results="1"] [data-tv-result="2"] { visibility: hidden; }
+.tv-diagram[data-tv-registered="true"] .tv-empty,
+.tv-diagram:not([data-tv-registered="true"]) .tv-stored { visibility: hidden; }
+.tv-diagram[data-tv-view="exchange"] [data-tv-flow-only],
+.tv-diagram[data-tv-view="matrix"] [data-tv-flow-only] { opacity: 0; }
+.tv-diagram[data-tv-view="matrix"] [data-tv-node]:not(.tv-vault),
+.tv-diagram[data-tv-view="matrix"] :is(.tv-route, .tv-chips, .tv-exchange-note) {
+  opacity: 0;
+  transition: opacity 650ms ease;
+}
+.tv-diagram:not([data-tv-view="exchange"]):not([data-tv-vault-phase="approach"]) .tv-exchange-note,
+.tv-diagram[data-tv-vault-phase="table"] [data-tv-world],
+.tv-diagram:not([data-tv-vault-phase="focused"]):not([data-tv-vault-phase="opening"]) .tv-vault-context {
+  visibility: hidden;
+}
+.tv-vault-context text { text-anchor: middle; font-size: 23px; fill: #ccff00; }
+.tv-vault-context .tv-small { font-size: 17px; fill: #cdd4cb; }
+.tv-diagram[data-tv-view="exchange"] .tv-route[data-tv-route="vault"] { stroke-width: 3px; }
+.tv-exchange-note text { font-size: 18px; }
+.tv-exchange-note .tv-exchange-label { fill: #ccff00; }
+.tv-exchange-note .tv-small { fill: #cdd4cb; font-size: 16px; }
+.tv-chip rect { fill: #132519; stroke: #ccff00; stroke-width: 1px; }
+.tv-chip text { fill: #eaff91; font-size: 14px; dominant-baseline: central; }
+.tv-chip circle { fill: #ccff00; }
+.tv-chip[data-kind="credential"] rect { fill: #ccff00; stroke: #ccff00; }
+.tv-chip[data-kind="credential"] text { fill: #0a170b; }
+.tv-chip[data-kind="sealed"] rect { fill: #20330e; }
+.tv-chip[data-kind="result"] rect { fill: #dce9dc; stroke: #dce9dc; }
+.tv-chip[data-kind="result"] text { fill: #132519; }
+
+
+.tv-incident {
+  padding: 30px 34px;
+  border-left: 3px solid #ccff00;
+  background: #17291b;
+}
+.tv-incident p:not(.tiny-label) {
+  margin-top: 17px;
+  font-size: 26px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+.tv-matrix {
+  position: absolute;
+  inset: 11px 26px 11px;
+  display: grid;
+  align-content: center;
+  padding: 16px 25px;
+  background: #132619;
+  border: 1px solid #69816a;
+  border-radius: 8px;
+}
+.tv-matrix[hidden] { display: none; }
+.tv-matrix-header { display: flex; align-items: baseline; gap: 22px; margin-bottom: 12px; }
+.tv-matrix-header strong { color: #ccff00; font-size: 28px; }
+.tv-matrix-header span { color: #cdd4cb; font-size: 17px; }
+@media (prefers-reduced-motion: reduce) {
+  .tv-diagram[data-tv-view="matrix"] * { transition: none !important; }
+}
+.tv-matrix table { width: 100%; border-collapse: collapse; font-size: 18px; }
+.tv-matrix th, .tv-matrix td { padding: 10px 12px; border-bottom: 1px solid #536a54; text-align: left; }
+.tv-matrix thead th { color: #cdd4cb; font-size: 16px; }
+.tv-matrix .tv-match { background: #ccff00; color: #0c1707; font-weight: 800; }
+.tv-matrix p { margin-top: 12px; color: #e8f0e6; font-size: 18px; }
+.tv-matrix p strong { color: #ccff00; }
+
+
+.te-parts {
+  display: grid;
+  gap: 16px;
+}
+
+.te-parts .tv-incident {
+  padding: 20px 26px;
+}
+
+.te-parts h2 {
+  margin: 6px 0 0;
+  font-size: 26px;
+}
+
+.te-parts p:not(.tiny-label) {
+  margin: 6px 0 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--bay);
+}
+
+.te-flow-note rect {
+  fill: #11251a;
+  stroke: #536a54;
+}
+
+.te-flow-note text {
+  fill: var(--bay);
+  font-size: 16px;
+}
+
+.te-flow-note tspan {
+  fill: #ccff00;
+  font-family: monospace;
+}
+
+.te-protocol {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.te-protocol article {
+  background: #11251a;
+  border: 1px solid #536a54;
+  border-radius: 8px;
+  padding: 18px 22px;
+}
+
+.te-protocol h3 {
+  margin: 0 0 14px;
+  font-size: 21px;
+  color: #ccff00;
+}
+
+.te-protocol dl {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  margin: 0;
+}
+
+.te-protocol dt,
+.te-protocol dd {
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #3b503d;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.te-protocol dd {
+  color: var(--bay);
+  overflow-wrap: anywhere;
+}
+
+.te-protocol code {
+  font-size: 14px;
+}
+
+.te-protocol .te-protocol-note {
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--bay);
+}
+
+
+.te-explain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 166px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.te-explain-card {
+  padding: 20px 23px;
+  border: 1px solid #536a54;
+  border-radius: 8px;
+  background: #11251a;
+}
+
+.te-explain-card.te-explain-emphasis {
+  border-color: #ccff00;
+}
+
+.te-explain-card h3 {
+  margin: 0 0 15px;
+  color: #ccff00;
+  font-size: 22px;
+}
+
+.te-explain-card .te-example-name {
+  margin: 0 0 17px;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.te-explain-card dl {
+  margin: 0;
+}
+
+.te-explain-card dt {
+  border-top: 1px solid #3b503d;
+  padding-top: 8px;
+  color: var(--bay);
+  font-size: 14px;
+}
+
+.te-explain-card dd {
+  margin: 3px 0 9px;
+  font-size: 17px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.te-explain-card dd:last-child {
+  margin-bottom: 0;
+}
+
+.te-explain-card code {
+  font-size: 15px;
+}
+
+.te-problem-gap,
+.te-standard-server {
+  text-align: center;
+}
+
+.te-problem-mark {
+  display: inline-grid;
+  width: 49px;
+  height: 49px;
+  place-items: center;
+  border: 1px solid var(--bay);
+  border-radius: 50%;
+  color: var(--bay);
+  font-size: 32px;
+  line-height: 1;
+}
+
+.te-problem-gap p,
+.te-standard-server p {
+  margin: 9px 0 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.te-problem-gap small,
+.te-standard-server span {
+  color: var(--bay);
+  font-size: 13px;
+}
+
+.te-standard-server {
+  position: relative;
+  padding: 17px 9px;
+  border: 1px solid #536a54;
+  border-radius: 8px;
+  background: #11251a;
+}
+
+.te-standard-server::before,
+.te-standard-server::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  border-top: 2px dashed #536a54;
+}
+
+.te-standard-server::before { right: 100%; }
+.te-standard-server::after { left: 100%; }
+
+.te-standard-server strong {
+  display: block;
+  margin-top: 3px;
+  color: #ccff00;
+  font-size: 19px;
+}
+
+
+.te-context-diagram :is(.te-context-label, .te-context-detail, .te-context-accepted, .te-context-rejection text) {
+  text-anchor: middle;
+}
+
+.te-context-diagram .te-context-role {
+  fill: #ccff00;
+  font-size: 21px;
+}
+
+.te-context-diagram .te-context-label {
+  font-size: 16px;
+}
+
+.te-context-diagram .te-context-detail {
+  fill: #cdd4cb;
+  font-size: 15px;
+}
+
+.te-context-diagram:not([data-tv-mode="tool-attempt"]) .te-context-tool {
+  opacity: .52;
+}
+
+.te-context-diagram .te-context-accepted,
+.te-context-diagram .te-context-rejection {
+  visibility: hidden;
+}
+
+.te-context-diagram:is([data-tv-mode="tool-attempt"], :has([data-tv-arrival="context-entry"])) .te-context-accepted {
+  visibility: visible;
+  fill: #ccff00;
+  font-size: 16px;
+}
+
+.te-context-diagram:has([data-tv-arrival="context-tool"]) .te-context-rejection {
+  visibility: visible;
+}
+
+.te-context-diagram .tv-route[data-tv-route="context-tool"].tv-active {
+  stroke: #cdd4cb;
+}
+
+.te-context-rejection circle,
+.te-context-rejection rect,
+.te-context-diagram .tv-chip[data-kind="rejected"] rect {
+  fill: #18291e;
+  stroke: #cdd4cb;
+}
+
+.te-context-rejection path {
+  fill: none;
+  stroke: #cdd4cb;
+  stroke-width: 2;
+}
+
+.te-context-diagram .te-context-rejection text {
+  fill: #cdd4cb;
+  font-size: 16px;
+}
+
+.te-context-diagram .te-context-rejection .te-context-needed {
+  fill: #ccff00;
+}
+
+.te-context-diagram .tv-chip[data-kind="rejected"] text {
+  fill: #e8f0e6;
+}
 </style></head><body>
 <header class="chrome topbar"><div class="brand-line">KONG <span>THE AI CONNECTIVITY COMPANY</span></div><div class="top-actions"><button data-overview hidden>概要に戻る ↑</button><button data-toc>目次</button><button data-fullscreen>全画面 ↗</button></div></header>
 <div class="reveal"><main class="slides">
-<section id="contents" data-title="目次"><div class="page pilot-toc extended-catalog large-catalog"><div class="eyebrow">KONG / COMPONENTS</div><div class="toc-layout"><div><h1>Kongの<br>ソリューション</h1><p class="lead">API・AIの接続、管理、セキュリティ。</p><span class="pilot-review-tag">MASTER · DARK</span><p class="toc-note">全14パーツ。通常11パーツ・本文59ページ。<br>animation 3パーツ・25シーン（各トップは別）。<br>左右でパーツ、上下で内容・シーンへ。<br>アニメーションは各シーンで停止。</p></div><div class="toc-list"><a class="toc-entry" data-part-type="story" href="#/kong-overview--overview--overview"><small>01 / 5 PAGES</small><strong>Kongの概要紹介 <span>→</span></strong><p>全体像・課題・基盤・第三者評価・日本の支援体制。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-connectivity--overview--overview"><small>02 / 4 PAGES</small><strong>AI Connectivity <span>→</span></strong><p>分断した接続から、AIを広げる共通基盤へ。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-gateway--overview--overview"><small>03 / 6 PAGES</small><strong>AI Gateway <span>→</span></strong><p>モデル・ツール・AIエージェントを、適切に制御する。</p></a><a class="toc-entry" data-part-type="story" href="#/context-mesh--overview--overview"><small>04 / 5 PAGES</small><strong>Context Mesh <span>→</span></strong><p>必要なツールを探し、必要な結果をAIエージェントへ。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-mulesoft--overview--overview"><small>05 / 4 PAGES</small><strong>Kong vs MuleSoft <span>→</span></strong><p>拡張言語・Context Mesh・DataKitのリアルタイムフローで比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-apigee--overview--overview"><small>06 / 4 PAGES</small><strong>Kong vs Apigee <span>→</span></strong><p>軽量な実行系・DC内完結/Air-Gapped・context最適化で比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-aws--overview--overview"><small>07 / 5 PAGES</small><strong>Kong vs AWS <span>→</span></strong><p>案件を跨ぐAIエージェント接続管理・Bedrock外のLLM選択/切替・LLM負荷削減。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-azure--overview--overview"><small>08 / 5 PAGES</small><strong>Kong vs Azure <span>→</span></strong><p>CSPからの管理独立・配置別AI機能差の解消・LLM外のAPI結果加工。</p></a><a class="toc-entry" data-part-type="story" href="#/api-security--overview--overview"><small>09 / 6 PAGES</small><strong>APIセキュリティ <span>→</span></strong><p>顧客情報へのアクセス、返却項目、悪用対策と運用</p></a><a class="toc-entry" data-part-type="story" href="#/ai-security--overview--overview"><small>10 / 8 PAGES</small><strong>AIセキュリティ <span>→</span></strong><p>データ検査、ツール権限、接続先資格情報と運用</p></a><a class="toc-entry" data-part-type="animation" href="#/ai-connectivity-animation--overview--overview"><small>11 / ANIMATION / 6 SCENES</small><strong>AI Connectivity <span>→</span></strong><p>接続先の広がりと管理</p></a><a class="toc-entry" data-part-type="animation" href="#/llm-connectivity-animation--overview--overview"><small>12 / ANIMATION / 5 SCENES</small><strong>LLM Connectivity <span>→</span></strong><p>モデル接続と入力の保護</p></a><a class="toc-entry" data-part-type="animation" href="#/context-mesh-animation--overview--overview"><small>13 / ANIMATION / 14 SCENES</small><strong>Context Mesh <span>→</span></strong><p>MCP・Context Sprawl・Context Bloat</p></a><a class="toc-entry" data-part-type="story" href="#/kong-apiops--overview--overview"><small>14 / ANIMATION / 7 PAGES</small><strong>Kong APIOpsとAI駆動運用 <span>→</span></strong><p>Gitによる設定反映、APIの公開と利用、Skillsを使ったAI駆動運用</p></a></div></div></div></section>
+<section id="contents" data-title="目次"><div class="page pilot-toc extended-catalog large-catalog"><div class="eyebrow">KONG / COMPONENTS</div><div class="toc-layout"><div><h1>Kongの<br>ソリューション</h1><p class="lead">API・AIの接続、管理、セキュリティ。</p><span class="pilot-review-tag">MASTER · DARK</span><p class="toc-note">全15パーツ。通常11パーツ・本文59ページ。<br>animation 4パーツ・41シーン（各トップは別）。<br>左右でパーツ、上下で内容・シーンへ。<br>アニメーションは各シーンで停止。</p></div><div class="toc-list"><a class="toc-entry" data-part-type="story" href="#/kong-overview--overview--overview"><small>01 / 5 PAGES</small><strong>Kongの概要紹介 <span>→</span></strong><p>全体像・課題・基盤・第三者評価・日本の支援体制。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-connectivity--overview--overview"><small>02 / 4 PAGES</small><strong>AI Connectivity <span>→</span></strong><p>分断した接続から、AIを広げる共通基盤へ。</p></a><a class="toc-entry" data-part-type="story" href="#/ai-gateway--overview--overview"><small>03 / 6 PAGES</small><strong>AI Gateway <span>→</span></strong><p>モデル・ツール・AIエージェントを、適切に制御する。</p></a><a class="toc-entry" data-part-type="story" href="#/context-mesh--overview--overview"><small>04 / 5 PAGES</small><strong>Context Mesh <span>→</span></strong><p>必要なツールを探し、必要な結果をAIエージェントへ。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-mulesoft--overview--overview"><small>05 / 4 PAGES</small><strong>Kong vs MuleSoft <span>→</span></strong><p>拡張言語・Context Mesh・DataKitのリアルタイムフローで比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-apigee--overview--overview"><small>06 / 4 PAGES</small><strong>Kong vs Apigee <span>→</span></strong><p>軽量な実行系・DC内完結/Air-Gapped・context最適化で比較。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-aws--overview--overview"><small>07 / 5 PAGES</small><strong>Kong vs AWS <span>→</span></strong><p>案件を跨ぐAIエージェント接続管理・Bedrock外のLLM選択/切替・LLM負荷削減。</p></a><a class="toc-entry" data-part-type="story" href="#/kong-vs-azure--overview--overview"><small>08 / 5 PAGES</small><strong>Kong vs Azure <span>→</span></strong><p>CSPからの管理独立・配置別AI機能差の解消・LLM外のAPI結果加工。</p></a><a class="toc-entry" data-part-type="story" href="#/api-security--overview--overview"><small>09 / 6 PAGES</small><strong>APIセキュリティ <span>→</span></strong><p>顧客情報へのアクセス、返却項目、悪用対策と運用</p></a><a class="toc-entry" data-part-type="story" href="#/ai-security--overview--overview"><small>10 / 8 PAGES</small><strong>AIセキュリティ <span>→</span></strong><p>データ検査、ツール権限、接続先資格情報と運用</p></a><a class="toc-entry" data-part-type="animation" href="#/ai-connectivity-animation--overview--overview"><small>11 / ANIMATION / 6 SCENES</small><strong>AI Connectivity <span>→</span></strong><p>接続先の広がりと管理</p></a><a class="toc-entry" data-part-type="animation" href="#/llm-connectivity-animation--overview--overview"><small>12 / ANIMATION / 5 SCENES</small><strong>LLM Connectivity <span>→</span></strong><p>モデル接続と入力の保護</p></a><a class="toc-entry" data-part-type="animation" href="#/context-mesh-animation--overview--overview"><small>13 / ANIMATION / 14 SCENES</small><strong>Context Mesh <span>→</span></strong><p>MCP・Context Sprawl・Context Bloat</p></a><a class="toc-entry" data-part-type="story" href="#/kong-apiops--overview--overview"><small>14 / ANIMATION / 7 PAGES</small><strong>Kong APIOpsとAI駆動運用 <span>→</span></strong><p>Gitによる設定反映、APIの公開と利用、Skillsを使ったAI駆動運用</p></a><a class="toc-entry" data-part-type="animation" href="#/token-exchange-vault-animation--exchange-intro--exchange-intro"><small>15 / ANIMATION / 16 SCENES</small><strong>Token Exchange / Token Vault <span>→</span></strong><p>第1部 Token Exchangeで接続先向けに新規発行。第2部 Token Vaultで連携した認証情報を再利用。</p></a></div></div></div></section>
 <section data-component="kong-overview" data-story="kong-overview" data-title="Kongの概要紹介">
 <section id="kong-overview--overview--overview" data-page="overview" data-tab="概要" data-title="Kongの概要">
   <div class="page">
@@ -1688,6 +2072,508 @@ html[data-theme="light"] .apio-page{--apio-focus:#3b6234;--apio-traffic:#0c6d57;
 </section>
 </section>
 
+<section data-component="token-exchange-vault-animation" data-story="token-exchange-vault-animation" data-kind="animation" data-title="Token Exchange / Token Vault">
+  <section id="token-exchange-vault-animation--exchange-intro--exchange-intro" data-page="exchange-intro" data-title="第1部 Token Exchange" data-tab="第1部 Token Exchange">
+    <div class="page pilot-page animation-overview tv-overview">
+      <div class="eyebrow">15 / TOKEN EXCHANGE &amp; TOKEN VAULT</div>
+      <div class="pilot-main hero-split">
+        <div class="hero-copy">
+          <h1 id="token-exchange-vault-animation--exchange-intro--heading">Token Exchange<br>と Token Vault</h1>
+          <p class="lead" id="token-exchange-vault-animation--exchange-intro--lead">AIエージェントが本人の権限で、障害台帳APIとGitHub MCPを呼び出すまで。</p>
+          <button class="text-link" data-down>第1部の全体像へ <span>↓</span></button>
+        </div>
+        <div class="te-parts" aria-label="資料の構成">
+          <div class="tv-incident">
+            <p class="tiny-label">第1部</p>
+            <h2 id="token-exchange-vault-animation--exchange-intro--part-one">Token Exchange</h2>
+            <p>既存のトークンを提示し、接続先に合うトークンの発行を依頼する。</p>
+          </div>
+          <div class="tv-incident">
+            <p class="tiny-label">第2部</p>
+            <h2 id="token-exchange-vault-animation--exchange-intro--part-two">Token Vault</h2>
+            <p>ツールと連携して得た認証情報を保管し、利用者と接続先に応じて取り出す。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="token-exchange-vault-animation--exchange-context--exchange-context" data-page="exchange-context" data-title="全体像｜本人の代理でToolを呼び出す" data-tab="認可の全体像" data-animation="token-vault">
+    <div class="page pilot-page animation-page tv-page">
+      <div class="eyebrow">15.1 / 第1部 AGENT AUTHORIZATION</div>
+      <h2 id="token-exchange-vault-animation--exchange-context--heading" data-scene-heading>エージェントがToolを使うと、認可の対象が増える</h2>
+      <p class="subtitle" id="token-exchange-vault-animation--exchange-context--lead" data-scene-description>佐藤さんはエージェント向けのアクセストークン A を持っている。</p>
+      <div class="pilot-main tv-main">
+        <div class="animation-copy" hidden>
+          <div data-scene-copy="0" data-scene-id="context-01" data-tv-mode="agent-start" data-tv-focus="user" data-tv-dock="context-start|トークン A|inbound">
+            <span id="token-exchange-vault-animation--exchange-context--context-01-title" data-motion-title>エージェントがToolを使うと、認可の対象が増える</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-01-description" data-motion-description>佐藤さんはエージェント向けのアクセストークン A を持っている。</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-01-caption" data-motion-caption>佐藤さんがエージェントに障害調査を依頼する。</span>
+          </div>
+          <div data-scene-copy="1" data-scene-id="context-02" data-tv-mode="agent-access" data-tv-focus="user agent" data-tv-dock="context-entry|トークン A|inbound">
+            <span id="token-exchange-vault-animation--exchange-context--context-02-title" data-motion-title>トークン A でエージェントに作業を依頼</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-02-description" data-motion-description>エージェントが A を受け入れ、佐藤さんの依頼を処理する。</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-02-caption" data-motion-caption>エージェントは A で依頼を受理。調査を進める中で、障害台帳の参照が必要になる。</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-02-beat-1" data-tv-beat data-tv-route="context-entry" data-tv-token="トークン A" data-tv-kind="inbound">佐藤さんが障害調査の依頼とトークン A をエージェントに送る。</span>
+          </div>
+          <div data-scene-copy="2" data-scene-id="context-03" data-tv-mode="tool-attempt" data-tv-focus="agent" data-tv-dock="context-tool|トークン A|rejected">
+            <span id="token-exchange-vault-animation--exchange-context--context-03-title" data-motion-title>Toolはエージェント向けのトークン A を拒否</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-03-description" data-motion-description>エージェントは佐藤さんの代理で障害台帳APIを呼び出す。</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-03-caption" data-motion-caption>障害台帳APIが受け入れる宛先と参照権限を持つアクセストークンが必要になる。</span>
+            <span id="token-exchange-vault-animation--exchange-context--context-03-beat-1" data-tv-beat data-tv-route="context-tool" data-tv-token="トークン A" data-tv-kind="inbound">エージェントで受理された同じ A を、障害台帳APIに提示してみる。</span>
+          </div>
+        </div>
+        <svg class="tv-diagram te-context-diagram" viewbox="0 0 1152 334" role="img" aria-label="ユーザーのトークンAをAIエージェントが受理し、代理アクセス先の障害台帳APIが宛先不一致で拒否する流れ">
+          <path class="tv-station" data-tv-route="context-start" d="M39 216 H163"></path>
+          <path class="tv-route" data-tv-route="context-entry" d="M213 166 H469"></path>
+          <g class="te-context-tool">
+            <path class="tv-route" data-tv-route="context-tool" d="M683 166 H902"></path>
+            <path class="tv-route" d="M926 166 H939"></path>
+            <text class="te-context-label" x="811" y="134">佐藤さんの代理で呼び出す</text>
+            <text class="te-context-detail" x="811" y="201">Tool API向けの認可</text>
+          </g>
+          <g class="tv-node" data-tv-node="user">
+            <rect x="8" y="96" width="205" height="143" rx="8"></rect>
+            <text class="te-context-role" x="110.5" y="130">ユーザー</text>
+            <text x="110.5" y="160">佐藤さん</text>
+            <text class="tv-small" x="110.5" y="188">「障害票を調べて」</text>
+          </g>
+          <g class="tv-node tv-agent" data-tv-node="agent">
+            <rect x="469" y="96" width="214" height="143" rx="8"></rect>
+            <text class="te-context-role" x="576" y="130">AIエージェント</text>
+            <text x="576" y="160">障害調査を実行</text>
+            <text class="tv-small" x="576" y="188">障害票の詳細を取得したい</text>
+          </g>
+          <g class="tv-node te-context-tool" data-tv-node="tool">
+            <rect x="939" y="96" width="205" height="143" rx="8"></rect>
+            <text class="te-context-role" x="1041.5" y="130">Tool（MCP）</text>
+            <text x="1041.5" y="160">障害台帳API</text>
+            <text class="tv-small" x="1041.5" y="188">宛先と参照権限を確認</text>
+          </g>
+          <text class="te-context-label" x="341" y="134">エージェントに作業を依頼</text>
+          <text class="te-context-detail" x="341" y="201">エージェント利用の認可</text>
+          <text class="te-context-accepted" x="341" y="231">✓ A を受理</text>
+          <g class="te-context-rejection">
+            <circle cx="915" cy="166" r="11"></circle>
+            <path d="M911 162 l8 8 m0 -8 l-8 8"></path>
+            <text x="811" y="231">A を拒否 · 宛先が異なる</text>
+            <rect x="702" y="264" width="442" height="45" rx="6"></rect>
+            <text class="te-context-needed" x="923" y="292">必要なもの　障害台帳API向けのアクセストークン</text>
+          </g>
+          <g class="tv-chips" aria-hidden="true"></g>
+        </svg>
+      </div>
+      <div class="animation-toolbar" data-animation-toolbar></div>
+      <div class="takeaway"><span class="tiny-label">要点</span><p id="token-exchange-vault-animation--exchange-context--takeaway" data-scene-caption>佐藤さんがエージェントに障害調査を依頼する。</p></div>
+      <div class="source-note animation-source"><a href="https://www.rfc-editor.org/rfc/rfc8693.html#section-2.3" target="_blank" rel="noopener noreferrer">RFC 8693 §2.3</a></div>
+    </div>
+  </section>
+
+  <section id="token-exchange-vault-animation--exchange-problem--exchange-problem" data-page="exchange-problem" data-title="課題｜入口トークンと接続先の宛先が異なる" data-tab="課題">
+    <div class="page pilot-page tv-page">
+      <div class="eyebrow">15.2 / 第1部 PROBLEM STATEMENT</div>
+      <h2 id="token-exchange-vault-animation--exchange-problem--heading">入口で認証できても、接続先は別のトークンを要求する</h2>
+      <p class="subtitle" id="token-exchange-vault-animation--exchange-problem--lead">佐藤さんの障害調査を例に、AIエージェントから社内の障害台帳APIを呼び出す。</p>
+      <div class="pilot-main te-explain te-problem" aria-label="入口トークンの宛先と障害台帳APIが求める宛先の比較">
+        <article class="te-explain-card">
+          <h3>エージェントが持つトークン</h3>
+          <p class="te-example-name">入口トークン A</p>
+          <dl>
+            <dt>宛先の例</dt><dd><code>aud = agent-entry</code></dd>
+            <dt>使い道</dt><dd>Gatewayの入口APIを呼ぶ</dd>
+          </dl>
+        </article>
+        <div class="te-problem-gap">
+          <span class="te-problem-mark" aria-hidden="true">×</span>
+          <p>A を障害台帳APIに<br>提示すると拒否</p>
+          <small>宛先が一致しない</small>
+        </div>
+        <article class="te-explain-card te-explain-emphasis">
+          <h3>障害台帳APIの受入条件</h3>
+          <p class="te-example-name">障害台帳API向けトークン</p>
+          <dl>
+            <dt>宛先の例</dt><dd><code>aud = https://incidents.example.com</code></dd>
+            <dt>参照に必要な権限</dt><dd><code>incidents:read</code></dd>
+          </dl>
+        </article>
+      </div>
+      <div class="takeaway"><span class="tiny-label">解決したいこと</span><p id="token-exchange-vault-animation--exchange-problem--takeaway">佐藤さんの依頼を処理するために、障害台帳APIが受け入れる宛先と参照権限を持つトークンを取得する。</p></div>
+      <div class="source-note"><a href="https://www.rfc-editor.org/rfc/rfc8693.html#section-2.3" target="_blank" rel="noopener noreferrer">RFC 8693 §2.3</a> · <a href="https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.3" target="_blank" rel="noopener noreferrer">JWTの宛先 RFC 7519 §4.1.3</a></div>
+    </div>
+  </section>
+
+  <section id="token-exchange-vault-animation--exchange-standard--exchange-standard" data-page="exchange-standard" data-title="仕様｜RFC 8693が定義するトークン交換" data-tab="仕様">
+    <div class="page pilot-page tv-page">
+      <div class="eyebrow">15.3 / 第1部 RFC 8693</div>
+      <h2 id="token-exchange-vault-animation--exchange-standard--heading">RFC 8693は、トークン交換の要求と応答を定める</h2>
+      <p class="subtitle" id="token-exchange-vault-animation--exchange-standard--lead">OAuth 2.0の拡張。クライアントが既存のトークンを提示し、認可サーバーに新しいトークンの発行を依頼する。</p>
+      <div class="pilot-main te-explain te-standard" aria-label="交換クライアントの要求、認可サーバーの判断、交換応答">
+        <article class="te-explain-card">
+          <h3>クライアントが送るもの</h3>
+          <dl>
+            <dt>交換要求</dt><dd>交換用の <code>grant_type</code> と既存トークン、その型</dd>
+            <dt>必要に応じて指定</dt><dd>接続先 <code>resource</code> / <code>audience</code>、要求する権限 <code>scope</code></dd>
+            <dt>代理主体を示す場合</dt><dd><code>actor_token</code> とその型</dd>
+          </dl>
+        </article>
+        <div class="te-standard-server">
+          <span>OAuth 2.0</span>
+          <strong>認可サーバー</strong>
+          <p>トークンを検証し<br>発行可否を判定</p>
+        </div>
+        <article class="te-explain-card te-explain-emphasis">
+          <h3>認可サーバーが返すもの</h3>
+          <dl>
+            <dt>発行したトークンと型</dt><dd><code>access_token</code>、<code>issued_token_type</code></dd>
+            <dt>トークンの使い方</dt><dd><code>token_type</code>。アクセストークンの例では <code>Bearer</code></dd>
+            <dt>発行を拒否した場合</dt><dd>交換エラーを返す</dd>
+          </dl>
+        </article>
+      </div>
+      <div class="takeaway"><span class="tiny-label">発行ポリシー</span><p id="token-exchange-vault-animation--exchange-standard--takeaway">どの発行元やクライアントを信頼し、どの宛先・権限で発行するかは、認可サーバーのポリシーで決める。</p></div>
+      <div class="source-note"><a href="https://www.rfc-editor.org/rfc/rfc8693.html#section-1" target="_blank" rel="noopener noreferrer">RFC 8693 §1・§2</a></div>
+    </div>
+  </section>
+  <section id="token-exchange-vault-animation--exchange-flow--exchange-flow" data-page="exchange-flow" data-title="GatewayによるToken Exchange" data-tab="交換フロー" data-animation="token-vault">
+    <div class="page pilot-page animation-page tv-page">
+      <div class="eyebrow">15.4 / 第1部 KONG AI GATEWAY</div>
+      <h2 id="token-exchange-vault-animation--exchange-flow--heading" data-scene-heading>Kong AI Gatewayが接続先向けの交換を仲介</h2>
+      <p class="subtitle" id="token-exchange-vault-animation--exchange-flow--lead" data-scene-description>エージェントは入口トークン A で依頼する。Gatewayは障害台帳APIのルートに設定したトークン交換を実行する。</p>
+      <div class="pilot-main tv-main">
+        <div class="animation-copy" hidden>
+        <div data-scene-copy="3" data-scene-id="te-01" data-tv-focus="agent" data-tv-dock="agent-token|入口 A|inbound" data-tv-view="flow">
+          <span id="token-exchange-vault-animation--exchange-flow--te-01-title" data-motion-title>Kong AI Gatewayが接続先向けの交換を仲介</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-01-description" data-motion-description>エージェントは入口トークン A で依頼する。Gatewayは障害台帳APIのルートに設定したトークン交換を実行する。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-01-caption" data-motion-caption>Gatewayが交換クライアントとなり、認可サーバーから障害台帳API用の B1 を取得する。</span>
+        </div>
+        <div data-scene-copy="4" data-scene-id="te-02" data-tv-focus="gateway issuer" data-tv-dock="issuer|障害台帳用 B1|credential|reverse" data-tv-view="flow">
+          <span id="token-exchange-vault-animation--exchange-flow--te-02-title" data-motion-title>Gatewayが認可サーバーに交換を依頼</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-02-description" data-motion-description>Gatewayは設定に従って A を検証し、認可サーバーへ A・対象API・必要な参照権限を提示する。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-02-caption" data-motion-caption>認可サーバーが A と発行ポリシーを照合し、障害台帳API用の B1 を新たに発行する。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-02-beat-1" data-tv-beat data-tv-route="entry" data-tv-token="入口 A" data-tv-kind="inbound">エージェントからGatewayへ、入口 A で参照要求。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-02-beat-2" data-tv-beat data-tv-route="issuer" data-tv-token="A ＋ 宛先・権限" data-tv-kind="inbound">Gatewayから認可サーバーへ、RFC 8693の交換要求。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-02-beat-3" data-tv-beat data-tv-route="issuer" data-tv-token="障害台帳用 B1" data-tv-kind="credential" data-tv-reverse>認可サーバーが B1 を発行し、Gatewayに返す。</span>
+        </div>
+        <div data-scene-copy="5" data-scene-id="te-03" data-tv-focus="gateway target agent" data-tv-dock="target|障害台帳用 B1|credential;entry|障害票|result|reverse" data-tv-view="flow">
+          <span id="token-exchange-vault-animation--exchange-flow--te-03-title" data-motion-title>接続先用の B1 で障害台帳APIを呼ぶ</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-03-description" data-motion-description>Gatewayが B1 を下流リクエストに付け、障害台帳APIがトークンと参照権限を確認する。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-03-caption" data-motion-caption>Gatewayは交換を中継し、認可サーバーが B1 を発行する。エージェントは障害票の結果を受け取る。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-03-beat-1" data-tv-beat data-tv-route="target" data-tv-token="障害台帳用 B1" data-tv-kind="credential">Gatewayが B1 を付けて障害台帳APIを呼び出す。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-03-beat-2" data-tv-beat data-tv-route="target" data-tv-token="障害票" data-tv-kind="result" data-tv-reverse>障害台帳APIが障害票を返す。</span>
+          <span id="token-exchange-vault-animation--exchange-flow--te-03-beat-3" data-tv-beat data-tv-route="entry" data-tv-token="障害票" data-tv-kind="result" data-tv-reverse>Gatewayが調査結果をエージェントに返す。</span>
+        </div>
+        </div>
+        <svg class="tv-diagram" viewbox="0 0 1152 334" role="img" aria-label="Gatewayが入口トークンAを認可サーバーへ提示し、障害台帳API向けに発行されたB1を使う経路">
+          <path class="tv-station" data-tv-route="agent-token" d="M68 213 H211"></path>
+          <path class="tv-route" data-tv-route="entry" d="M260 169 H428"></path>
+          <path class="tv-route" data-tv-route="issuer" d="M554 124 V81"></path>
+          <path class="tv-route" data-tv-route="target" d="M680 169 H891"></path>
+          <g class="tv-node tv-agent" data-tv-node="agent">
+            <rect x="30" y="127" width="230" height="110" rx="8"></rect>
+            <text x="145" y="158">AIエージェント</text>
+            <text class="tv-small" x="145" y="184">佐藤さんの調査依頼</text>
+          </g>
+          <g class="tv-node" data-tv-node="issuer">
+            <rect x="427" y="17" width="254" height="64" rx="24"></rect>
+            <text x="554" y="44">認可サーバー</text>
+            <text class="tv-small" x="554" y="66">交換ポリシーを評価して B1 を発行</text>
+          </g>
+          <g class="tv-node tv-gateway" data-tv-node="gateway">
+            <rect x="428" y="124" width="252" height="90" rx="12"></rect>
+            <text x="554" y="164">Kong AI Gateway</text>
+            <text class="tv-small" x="554" y="191">交換クライアント・下流リクエスト</text>
+          </g>
+          <g class="tv-node" data-tv-node="target">
+            <rect x="891" y="127" width="232" height="85" rx="7"></rect>
+            <text x="1007" y="162">障害台帳API</text>
+            <text class="tv-small" x="1007" y="187">自分向けの B1 と参照権限を確認</text>
+          </g>
+          <g class="te-flow-note">
+            <rect x="428" y="256" width="695" height="48" rx="6"></rect>
+            <text x="445" y="285">対象の例　障害台帳API ／ 要求スコープ <tspan>incidents:read</tspan></text>
+          </g>
+          <g class="tv-chips" aria-hidden="true"></g>
+        </svg>
+      </div>
+      <div class="animation-toolbar" data-animation-toolbar></div>
+      <div class="takeaway"><span class="tiny-label">要点</span><p id="token-exchange-vault-animation--exchange-flow--takeaway" data-scene-caption>Gatewayが交換クライアントとなり、認可サーバーから障害台帳API用の B1 を取得する。</p></div>
+      <div class="source-note animation-source"><a href="https://www.rfc-editor.org/rfc/rfc8693.html#section-2" target="_blank" rel="noopener noreferrer">RFC 8693 §2</a> · <a href="https://developer.konghq.com/plugins/openid-connect/#token-exchange" target="_blank" rel="noopener noreferrer">Kong OpenID Connect</a></div>
+    </div>
+  </section>
+  <section id="token-exchange-vault-animation--exchange-protocol--exchange-protocol" data-page="exchange-protocol" data-title="障害台帳API向けの交換例" data-tab="交換例">
+    <div class="page pilot-page tv-page">
+      <div class="eyebrow">15.5 / 第1部 RFC 8693 実例</div>
+      <h2 id="token-exchange-vault-animation--exchange-protocol--heading">障害台帳API向けの交換例</h2>
+      <p class="subtitle" id="token-exchange-vault-animation--exchange-protocol--lead">Gatewayから認可サーバーのトークンエンドポイントへ、障害台帳API用のトークンを要求する例。</p>
+      <div class="pilot-main te-protocol">
+        <article>
+          <h3>Gateway → 認可サーバー</h3>
+          <dl>
+            <dt><code>grant_type</code></dt><dd><code>urn:ietf:params:oauth:grant-type:token-exchange</code></dd>
+            <dt><code>subject_token</code></dt><dd>入口のアクセストークン A</dd>
+            <dt><code>subject_token_type</code></dt><dd>アクセストークンを表す型</dd>
+            <dt><code>resource</code></dt><dd><code>https://incidents.example.com</code></dd>
+            <dt><code>scope</code></dt><dd><code>incidents:read</code></dd>
+          </dl>
+        </article>
+        <article>
+          <h3>認可サーバー → Gateway</h3>
+          <dl>
+            <dt><code>access_token</code></dt><dd>障害台帳API用の新しい B1</dd>
+            <dt><code>issued_token_type</code></dt><dd>発行したトークンの型</dd>
+            <dt><code>token_type</code></dt><dd>利用方法。この例では <code>Bearer</code></dd>
+            <dt><code>scope</code></dt><dd>付与された権限。要求値と異なる場合に応答へ含める</dd>
+          </dl>
+          <p class="te-protocol-note">認可サーバーのポリシーが、発行可否と付与する権限を決める。</p>
+        </article>
+      </div>
+      <div class="takeaway"><span class="tiny-label">第2部へ</span><p id="token-exchange-vault-animation--exchange-protocol--takeaway">GitHub MCPの例では、連携して取得した認証情報をToken Vaultに預け、後続の呼び出しで再利用する。</p></div>
+      <div class="source-note"><a href="https://www.rfc-editor.org/rfc/rfc8693.html#section-2.1" target="_blank" rel="noopener noreferrer">RFC 8693 §2.1–2.2</a></div>
+    </div>
+  </section>
+  <section id="token-exchange-vault-animation--overview--overview" data-page="overview" data-title="第2部 Token Vault" data-tab="第2部 Token Vault">
+    <div class="page pilot-page animation-overview tv-overview">
+      <div class="eyebrow">15.6 / 第2部 TOKEN VAULT</div>
+      <div class="pilot-main hero-split">
+        <div class="hero-copy">
+          <h1 id="token-exchange-vault-animation--overview--heading">AIエージェントに、<br>どこまで任せるか</h1>
+          <p class="lead" id="token-exchange-vault-animation--overview--lead">ツールには利用者本人の権限で接続。<br>接続先の認証情報は、GatewayとToken Vaultで扱う。</p>
+          <button class="text-link" data-down>ツール認証の流れを見る <span>↓</span></button>
+        </div>
+        <div class="tv-incident">
+          <p class="tiny-label">障害対応 ／ INC-042</p>
+          <p id="token-exchange-vault-animation--overview--request">「障害に関連する修正PRを探して。対応状況も確認して。」</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="token-exchange-vault-animation--risk--risk" data-page="risk" data-title="ツールの認証情報を持たせるリスク" data-tab="リスク" data-animation="token-vault">
+    <div class="page pilot-page animation-page tv-page">
+      <div class="eyebrow">15.7 / 第2部 CREDENTIAL RISK</div>
+      <h2 id="token-exchange-vault-animation--risk--heading" data-scene-heading>エージェントが3つのツールの認証情報を保持</h2>
+      <p class="subtitle" id="token-exchange-vault-animation--risk--lead" data-scene-description>GitHub・Slack・障害台帳を、接続先ごとの認証情報で利用する構成。</p>
+      <div class="pilot-main tv-main">
+        <div class="animation-copy" hidden>
+        <div data-scene-copy="6" data-scene-id="s01" data-tv-focus="agent" data-tv-dock="stored-github|GitHub用|credential;stored-slack|Slack用|credential;stored-ledger|台帳用|credential" data-tv-mode="normal">
+          <span id="token-exchange-vault-animation--risk--s01-title" data-motion-title>エージェントが3つのツールの認証情報を保持</span>
+          <span id="token-exchange-vault-animation--risk--s01-description" data-motion-description>GitHub・Slack・障害台帳を、接続先ごとの認証情報で利用する構成。</span>
+          <span id="token-exchange-vault-animation--risk--s01-caption" data-motion-caption>3つのツールを使うための認証情報が、エージェントの実行環境にある。</span>
+        </div>
+        <div data-scene-copy="7" data-scene-id="s02" data-tv-focus="agent github slack ledger" data-tv-dock="normal-github|GitHub用|credential;normal-slack|Slack用|credential;normal-ledger|台帳用|credential" data-tv-mode="normal">
+          <span id="token-exchange-vault-animation--risk--s02-title" data-motion-title>通常時｜それぞれの認証情報でツールへ</span>
+          <span id="token-exchange-vault-animation--risk--s02-description" data-motion-description>同じエージェントが、ツールごとに対応する認証情報を使う。</span>
+          <span id="token-exchange-vault-animation--risk--s02-caption" data-motion-caption>GitHub用・Slack用・台帳用の認証情報で、それぞれのツールを呼び出せる。</span>
+          <span id="token-exchange-vault-animation--risk--s02-beat-1" data-tv-beat data-tv-route="normal-github" data-tv-token="GitHub用" data-tv-kind="credential">エージェントがGitHub用の認証情報でアクセス。</span>
+          <span id="token-exchange-vault-animation--risk--s02-beat-2" data-tv-beat data-tv-route="normal-slack" data-tv-token="Slack用" data-tv-kind="credential">Slack用の認証情報でアクセス。</span>
+          <span id="token-exchange-vault-animation--risk--s02-beat-3" data-tv-beat data-tv-route="normal-ledger" data-tv-token="台帳用" data-tv-kind="credential">台帳用の認証情報でアクセス。</span>
+        </div>
+        <div data-scene-copy="8" data-scene-id="s03" data-tv-focus="agent third-party github slack ledger" data-tv-dock="direct-github|GitHub用|credential;direct-slack|Slack用|credential;direct-ledger|台帳用|credential" data-tv-mode="compromised">
+          <span id="token-exchange-vault-animation--risk--s03-title" data-motion-title>侵害時｜流出した認証情報でツールを直接呼べる</span>
+          <span id="token-exchange-vault-animation--risk--s03-description" data-motion-description>エージェントが侵害され、再利用できる認証情報が第三者に渡った場合。</span>
+          <span id="token-exchange-vault-animation--risk--s03-caption" data-motion-caption>第三者はエージェントを介さず、流出した認証情報で各ツールを直接呼び出せる。</span>
+          <span id="token-exchange-vault-animation--risk--s03-beat-1" data-tv-beat data-tv-route="leak" data-tv-token="3つの認証情報" data-tv-kind="sealed">侵害されたエージェントから、ツールの認証情報が流出。</span>
+          <span id="token-exchange-vault-animation--risk--s03-beat-2" data-tv-beat data-tv-route="direct-github" data-tv-token="GitHub用" data-tv-kind="credential">第三者が流出した認証情報でGitHubに直接アクセス。</span>
+          <span id="token-exchange-vault-animation--risk--s03-beat-3" data-tv-beat data-tv-route="direct-slack" data-tv-token="Slack用" data-tv-kind="credential">同様に、Slackにも直接アクセス。</span>
+          <span id="token-exchange-vault-animation--risk--s03-beat-4" data-tv-beat data-tv-route="direct-ledger" data-tv-token="台帳用" data-tv-kind="credential">障害台帳にも直接アクセスできる。</span>
+        </div>
+        </div>
+        <svg class="tv-diagram tv-risk-diagram" viewbox="0 0 1152 334" role="img" aria-label="3つのツールへの通常アクセスと、エージェント侵害後に第三者が認証情報を使う経路">
+          <g class="tv-risk-normal">
+            <path class="tv-route" data-tv-route="normal-github" d="M280 83 H881"></path>
+            <path class="tv-route" data-tv-route="normal-slack" d="M280 145 H881"></path>
+            <path class="tv-route" data-tv-route="normal-ledger" d="M280 207 H881"></path>
+          </g>
+          <g class="tv-risk-attack">
+            <path class="tv-route" data-tv-route="leak" d="M170 218 V245"></path>
+            <path class="tv-route" data-tv-route="direct-github" d="M280 278 H476 V83 H881"></path>
+            <path class="tv-route" data-tv-route="direct-slack" d="M280 278 H549 V145 H881"></path>
+            <path class="tv-route" data-tv-route="direct-ledger" d="M280 278 H622 V207 H881"></path>
+          </g>
+          <path class="tv-station" data-tv-route="stored-github" d="M84 125 H215"></path>
+          <path class="tv-station" data-tv-route="stored-slack" d="M84 155 H215"></path>
+          <path class="tv-station" data-tv-route="stored-ledger" d="M84 185 H215"></path>
+          <g class="tv-node tv-agent" data-tv-node="agent">
+            <rect x="60" y="61" width="220" height="157" rx="8"></rect>
+            <text x="170" y="96">AIエージェント</text>
+          </g>
+          <g class="tv-node tv-risk-attack" data-tv-node="third-party">
+            <rect x="60" y="245" width="220" height="64" rx="7"></rect>
+            <text x="170" y="271">悪意のある第三者</text>
+            <text class="tv-small" x="170" y="294">流出した認証情報を利用</text>
+          </g>
+          <g class="tv-node" data-tv-node="github">
+            <rect x="881" y="60" width="219" height="46" rx="7"></rect>
+            <text x="990" y="89">GitHub MCP</text>
+          </g>
+          <g class="tv-node" data-tv-node="slack">
+            <rect x="881" y="122" width="219" height="46" rx="7"></rect>
+            <text x="990" y="151">Slack MCP</text>
+          </g>
+          <g class="tv-node" data-tv-node="ledger">
+            <rect x="881" y="184" width="219" height="46" rx="7"></rect>
+            <text x="990" y="213">障害台帳ツール</text>
+          </g>
+          <g class="tv-risk-summary tv-risk-attack">
+            <rect x="704" y="257" width="396" height="52" rx="5"></rect>
+            <text x="720" y="280">ツールに対して第三者が直接アクセス</text>
+            <text class="tv-small" x="720" y="300">エージェントが使っていた認証情報が通る</text>
+          </g>
+          <g class="tv-chips" aria-hidden="true"></g>
+        </svg>
+      </div>
+      <div class="animation-toolbar" data-animation-toolbar></div>
+      <div class="takeaway"><span class="tiny-label">要点</span><p id="token-exchange-vault-animation--risk--takeaway" data-scene-caption>3つのツールを使うための認証情報が、エージェントの実行環境にある。</p></div>
+      <div class="source-note animation-source"><a href="https://developer.konghq.com/identity/token-vault/" target="_blank" rel="noopener noreferrer">Kong Token Vault</a></div>
+    </div>
+  </section>
+  <section id="token-exchange-vault-animation--scene--scene" data-page="scene" data-title="初回・後続とToken Exchange／Token Vault" data-tab="全体フロー" data-animation="token-vault">
+    <div class="page pilot-page animation-page tv-page">
+      <div class="eyebrow">15.8 / 第2部 INC-042</div>
+      <h2 id="token-exchange-vault-animation--scene--heading" data-scene-heading>初回と後続｜GitHub MCPを本人の権限で利用</h2>
+      <p class="subtitle" id="token-exchange-vault-animation--scene--lead" data-scene-description>当番の佐藤さんが、障害に関連する修正PRの調査をAIエージェントに依頼。</p>
+      <div class="pilot-main tv-main">
+        <div class="animation-copy" hidden>
+        <div data-scene-copy="9" data-scene-id="s04" data-tv-focus="agent gateway" data-tv-dock="agent-token|入口 A|inbound" data-tv-view="flow">
+          <span id="token-exchange-vault-animation--scene--s04-title" data-motion-title>初回と後続｜GitHub MCPを本人の権限で利用</span>
+          <span id="token-exchange-vault-animation--scene--s04-description" data-motion-description>当番の佐藤さんが、障害に関連する修正PRの調査をAIエージェントに依頼。</span>
+          <span id="token-exchange-vault-animation--scene--s04-caption" data-motion-caption>エージェントは入口 A でGatewayを利用。GitHub用 B はGatewayとVaultで扱う。</span>
+        </div>
+        <div data-scene-copy="10" data-scene-id="s05" data-tv-focus="agent gateway issuer vault" data-tv-dock="agent-token|入口 A|inbound;vault|暗号文 B|sealed" data-tv-view="flow" data-tv-register="true">
+          <span id="token-exchange-vault-animation--scene--s05-title" data-motion-title>初回｜認可サーバーから取得しVaultへ</span>
+          <span id="token-exchange-vault-animation--scene--s05-description" data-motion-description>佐藤さんがGitHubで連携に同意。Gatewayが認可コードを交換し、本人用のトークンを取得する。</span>
+          <span id="token-exchange-vault-animation--scene--s05-caption" data-motion-caption>Gatewayが B を受け取り、暗号化してVaultへ保存。エージェントには入口 A が残る。</span>
+          <span id="token-exchange-vault-animation--scene--s05-beat-1" data-tv-beat data-tv-route="entry" data-tv-token="入口 A" data-tv-kind="inbound">エージェントから、A でGitHub MCPへの初回要求。</span>
+          <span id="token-exchange-vault-animation--scene--s05-beat-2" data-tv-beat data-tv-route="issuer" data-tv-token="認可コード" data-tv-kind="inbound">本人の同意後、Gatewayが認可コードを交換。</span>
+          <span id="token-exchange-vault-animation--scene--s05-beat-3" data-tv-beat data-tv-route="issuer" data-tv-token="GitHub用 B" data-tv-kind="credential" data-tv-reverse>GitHubの認可サーバーが発行した B をGatewayへ。</span>
+          <span id="token-exchange-vault-animation--scene--s05-beat-4" data-tv-beat data-tv-route="vault" data-tv-token="暗号文 B" data-tv-kind="sealed">Gatewayが B を暗号化してVaultへ保存。</span>
+        </div>
+        <div data-scene-copy="11" data-scene-id="s06" data-tv-focus="gateway github agent" data-tv-dock="vault|暗号文 B|sealed;github|GitHub用 B|credential;entry|修正PR|result|reverse" data-tv-carry="vault|暗号文 B|sealed" data-tv-view="flow" data-tv-register="true" data-tv-results="1">
+          <span id="token-exchange-vault-animation--scene--s06-title" data-motion-title>初回｜GitHub MCPを呼び、修正PRを返す</span>
+          <span id="token-exchange-vault-animation--scene--s06-description" data-motion-description>Gatewayが取得した B を、GitHub MCPへの要求に付与する。</span>
+          <span id="token-exchange-vault-animation--scene--s06-caption" data-motion-caption>エージェントが受け取るのは修正PR。GitHub用のトークンはGateway側で扱う。</span>
+          <span id="token-exchange-vault-animation--scene--s06-beat-1" data-tv-beat data-tv-route="github" data-tv-token="GitHub用 B" data-tv-kind="credential">Gatewayが B を付けてGitHub MCPを呼び出す。</span>
+          <span id="token-exchange-vault-animation--scene--s06-beat-2" data-tv-beat data-tv-route="github" data-tv-token="修正PR" data-tv-kind="result" data-tv-reverse>GitHub MCPが修正PRをGatewayへ返す。</span>
+          <span id="token-exchange-vault-animation--scene--s06-beat-3" data-tv-beat data-tv-route="entry" data-tv-token="修正PR" data-tv-kind="result" data-tv-reverse>Gatewayが修正PRをエージェントへ返す。</span>
+        </div>
+        <div data-scene-copy="12" data-scene-id="s07" data-tv-focus="agent gateway vault github" data-tv-dock="vault|暗号文 B|sealed;github|GitHub用 B|credential" data-tv-view="flow" data-tv-register="true" data-tv-results="1">
+          <span id="token-exchange-vault-animation--scene--s07-title" data-motion-title>後続｜Vaultから取得して再びGitHubへ</span>
+          <span id="token-exchange-vault-animation--scene--s07-description" data-motion-description>同じ A で修正PRの更新状況を要求。GitHub用の認証情報はVaultに登録済み。</span>
+          <span id="token-exchange-vault-animation--scene--s07-caption" data-motion-caption>GatewayがVaultから取得・復号した B を付けて、GitHub MCPを呼び出す。</span>
+          <span id="token-exchange-vault-animation--scene--s07-beat-1" data-tv-beat data-tv-route="entry" data-tv-token="入口 A" data-tv-kind="inbound">同じ A で修正PRの最新状態を要求。</span>
+          <span id="token-exchange-vault-animation--scene--s07-beat-2" data-tv-beat data-tv-route="vault" data-tv-token="A ＋ GitHub" data-tv-kind="inbound">GatewayがVaultへ A とGitHubを提示。</span>
+          <span id="token-exchange-vault-animation--scene--s07-beat-3" data-tv-beat data-tv-route="vault" data-tv-token="暗号文 B" data-tv-kind="sealed" data-tv-reverse>Vaultが佐藤さんのGitHub用の暗号文を返す。</span>
+          <span id="token-exchange-vault-animation--scene--s07-beat-4" data-tv-beat data-tv-route="github" data-tv-token="GitHub用 B" data-tv-kind="credential">Gatewayが復号した B でGitHub MCPにアクセス。</span>
+        </div>
+        <div data-scene-copy="13" data-scene-id="s08" data-tv-focus="agent gateway github" data-tv-dock="vault|暗号文 B|sealed;github|GitHub用 B|credential;entry|更新状況|result|reverse" data-tv-view="flow" data-tv-register="true" data-tv-results="2" data-tv-carry="vault|暗号文 B|sealed;github|GitHub用 B|credential">
+          <span id="token-exchange-vault-animation--scene--s08-title" data-motion-title>後続｜更新状況をエージェントに返す</span>
+          <span id="token-exchange-vault-animation--scene--s08-description" data-motion-description>初回の修正PRに続き、後続リクエストの結果がエージェントまで戻る。</span>
+          <span id="token-exchange-vault-animation--scene--s08-caption" data-motion-caption>エージェントは調査結果を受け取る。MCPの認証情報を扱う経路はGatewayとVault側。</span>
+          <span id="token-exchange-vault-animation--scene--s08-beat-1" data-tv-beat data-tv-route="github" data-tv-token="更新状況" data-tv-kind="result" data-tv-reverse>GitHub MCPが更新状況をGatewayへ返す。</span>
+          <span id="token-exchange-vault-animation--scene--s08-beat-2" data-tv-beat data-tv-route="entry" data-tv-token="更新状況" data-tv-kind="result" data-tv-reverse>Gatewayが結果だけをエージェントへ返す。</span>
+        </div>
+        <div data-scene-copy="14" data-scene-id="s09" data-tv-focus="gateway vault github" data-tv-dock="vault|暗号文 B|sealed;github|GitHub用 B|credential" data-tv-view="exchange" data-tv-register="true">
+          <span id="token-exchange-vault-animation--scene--s09-title" data-motion-title>Token Exchange｜GatewayとVault間の取得通信</span>
+          <span id="token-exchange-vault-animation--scene--s09-description" data-motion-description>OAuth 2.0 Token Exchangeの公開標準（RFC 8693）のgrantを使い、使用する認証情報を選ぶ。</span>
+          <span id="token-exchange-vault-animation--scene--s09-caption" data-motion-caption>交換の区間はGatewayとVaultの間。Gatewayが復号した B を対象のMCPに付与する。</span>
+          <span id="token-exchange-vault-animation--scene--s09-beat-1" data-tv-beat data-tv-route="vault" data-tv-token="A ＋ GitHub" data-tv-kind="inbound">Token Exchangeのgrantで A と接続先を提示。</span>
+          <span id="token-exchange-vault-animation--scene--s09-beat-2" data-tv-beat data-tv-route="vault" data-tv-token="暗号文 B" data-tv-kind="sealed" data-tv-reverse>Vaultが該当する資格情報の暗号文を返す。</span>
+          <span id="token-exchange-vault-animation--scene--s09-beat-3" data-tv-beat data-tv-route="github" data-tv-token="GitHub用 B" data-tv-kind="credential">Gatewayが復号し、B をGitHub MCPへ付与。</span>
+        </div>
+        <div data-scene-copy="15" data-scene-id="s10" data-tv-focus="vault" data-tv-view="matrix" data-tv-register="true">
+          <span id="token-exchange-vault-animation--scene--s10-title" data-motion-title>Token Vault｜利用者ごと・ツールごとに保管</span>
+          <span id="token-exchange-vault-animation--scene--s10-description" data-motion-description>同じVaultで、複数の利用者が各ツールで連携した認証情報を暗号化して管理する。</span>
+          <span id="token-exchange-vault-animation--scene--s10-caption" data-motion-caption>入口 A で佐藤さんを特定し、GitHubとの組み合わせで該当する認証情報を選ぶ。</span>
+        </div>
+        </div>
+        <svg class="tv-diagram" viewbox="0 0 1152 334" role="img" aria-label="代理アクセスの初回、後続と、Gateway・Vault・GitHub MCP間の通信">
+          <g data-tv-world>
+            <g aria-hidden="true">
+              <path class="tv-station" data-tv-route="agent-token" d="M49 197 H219"></path>
+              <path class="tv-route" data-tv-route="entry" d="M257 169 H428" data-tv-flow-only></path>
+              <path class="tv-route" data-tv-route="issuer" d="M554 90 V56" data-tv-flow-only></path>
+              <path class="tv-route" data-tv-route="vault" d="M554 250 V281"></path>
+              <path class="tv-route" data-tv-route="github" d="M680 106 H896"></path>
+              <path class="tv-route" data-tv-route="slack" d="M680 169 H896" data-tv-flow-only></path>
+              <path class="tv-route" data-tv-route="ledger" d="M680 232 H896" data-tv-flow-only></path>
+            </g>
+            <g class="tv-node tv-agent" data-tv-node="agent" data-tv-flow-only>
+              <rect x="27" y="129" width="230" height="89" rx="8"></rect>
+              <text x="142" y="163">AIエージェント</text>
+              <text class="tv-small" x="142" y="177">佐藤さんの調査依頼</text>
+            </g>
+            <g class="tv-node" data-tv-node="issuer" data-tv-flow-only>
+              <rect x="427" y="7" width="254" height="49" rx="23"></rect>
+              <text x="554" y="28">GitHub 認可サーバー</text>
+              <text class="tv-small" x="554" y="46">本人の同意に基づきBを発行</text>
+            </g>
+            <g class="tv-node tv-gateway" data-tv-node="gateway">
+              <rect x="428" y="90" width="252" height="160" rx="12"></rect>
+              <text x="554" y="160">Kong AI Gateway</text>
+              <text class="tv-small" x="554" y="190">取得・復号・認証情報の付与</text>
+            </g>
+            <g class="tv-node tv-vault" data-tv-node="vault">
+              <rect x="400" y="281" width="308" height="46" rx="8"></rect>
+              <text x="554" y="302">Token Vault</text>
+              <text class="tv-small tv-stored" x="554" y="319">佐藤さん × GitHub ／ 暗号文 B</text>
+              <text class="tv-small tv-empty" x="554" y="319">佐藤さん × GitHub ／ 登録前</text>
+            </g>
+            <g class="tv-node" data-tv-node="github">
+              <rect x="896" y="83" width="230" height="46" rx="7"></rect>
+              <text x="1011" y="112">GitHub MCP</text>
+            </g>
+            <g class="tv-node" data-tv-node="slack" data-tv-flow-only>
+              <rect x="896" y="146" width="230" height="46" rx="7"></rect>
+              <text x="1011" y="175">Slack MCP</text>
+            </g>
+            <g class="tv-node" data-tv-node="ledger" data-tv-flow-only>
+              <rect x="896" y="209" width="230" height="46" rx="7"></rect>
+              <text x="1011" y="238">障害台帳ツール</text>
+            </g>
+            <g class="tv-results" data-tv-flow-only>
+              <rect x="27" y="244" width="282" height="80" rx="6"></rect>
+              <text class="tv-results-heading" x="42" y="264">エージェントが受け取った結果</text>
+              <text x="42" y="287" data-tv-result="1">初回　修正PR #1284</text>
+              <text x="42" y="311" data-tv-result="2">後続　PRの更新状況</text>
+            </g>
+            <g class="tv-chips" aria-hidden="true"></g>
+          </g>
+          <g class="tv-exchange-note" aria-hidden="true">
+            <rect x="20" y="59" width="232" height="203" rx="7"></rect>
+            <text class="tv-exchange-label" x="38" y="92">TOKEN EXCHANGE</text>
+            <text x="38" y="124">OAuth 2.0 / RFC 8693</text>
+            <text x="38" y="177">Gateway → Vault</text>
+            <text class="tv-small" x="38" y="204">入口 A と接続先を提示</text>
+            <text x="38" y="235">Vault → 暗号文 B</text>
+          </g>
+          <g class="tv-vault-context" aria-hidden="true">
+            <text x="576" y="228">利用者 × ツール</text>
+            <text class="tv-small" x="576" y="261">連携済みの認証情報を、組み合わせごとに暗号化して保管</text>
+          </g>
+        </svg>
+        <div class="tv-matrix" data-tv-matrix hidden>
+          <div class="tv-matrix-header">
+            <strong>Token Vaultの保管内容</strong>
+            <span>利用者ごと・ツールごとの、暗号化した認証情報（例）</span>
+          </div>
+          <table aria-label="Token Vaultに保管した利用者別・ツール別の認証情報の例">
+            <thead><tr><th scope="col">利用者</th><th scope="col">GitHub MCP</th><th scope="col">Slack MCP</th><th scope="col">障害台帳ツール</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">佐藤さん（当番）</th><td class="tv-match">暗号文 B</td><td>暗号文 S1</td><td>暗号文 D1</td></tr>
+              <tr><th scope="row">鈴木さん</th><td>暗号文 G2</td><td>未連携</td><td>暗号文 D2</td></tr>
+              <tr><th scope="row">高橋さん</th><td>未連携</td><td>暗号文 S3</td><td>暗号文 D3</td></tr>
+            </tbody>
+          </table>
+          <p><strong>今回の取得</strong>　佐藤さん × GitHub MCP → 暗号文 B</p>
+        </div>
+      </div>
+      <div class="animation-toolbar" data-animation-toolbar></div>
+      <div class="takeaway"><span class="tiny-label">要点</span><p id="token-exchange-vault-animation--scene--takeaway" data-scene-caption>エージェントは入口 A でGatewayを利用。GitHub用 B はGatewayとVaultで扱う。</p></div>
+      <div class="source-note animation-source"><a href="https://www.rfc-editor.org/rfc/rfc8693.html#section-2" target="_blank" rel="noopener noreferrer">RFC 8693 §2</a> · <a href="https://developer.konghq.com/identity/token-vault/" target="_blank" rel="noopener noreferrer">Kong Token Vault</a></div>
+    </div>
+  </section>
+</section>
+
 </main></div>
 <footer class="chrome bottom-bar"><div class="trail"><span data-location>CONTENTS</span><span data-current-title>Kong</span></div><nav class="page-tabs" data-page-tabs aria-label="現在のストーリーのページ"></nav><div class="page-navigation"><div class="horizontal-nav"><button data-left aria-label="前の概要へ">←</button><button data-right aria-label="次の概要へ">→</button></div><span class="nav-label" data-nav-label>概要へ</span><button data-up aria-label="前の詳細へ">↑</button><button data-down-or-start aria-label="次の詳細へ">↓</button></div></footer>
 <aside class="animation-controls-storage" hidden><div class="animation-controls" data-animation-controls hidden><select data-scene-select aria-label="シーン選択"></select><button data-animation-replay>再演</button><button data-animation-stop>停止</button><span data-animation-status role="status"></span></div></aside>
@@ -2299,6 +3185,240 @@ function mountP1(slide, onChange = () => {}) {
   };
 }
 
+/** Shared controls present the fixed topology, transfers and close-ups. */
+function mountTokenVault(slide, onChange) {
+  const root = slide.querySelector(".tv-diagram");
+  const world = root.querySelector("[data-tv-world]");
+  const matrix = slide.querySelector("[data-tv-matrix]");
+  const vault = root.querySelector(".tv-vault");
+  const copy = [...slide.querySelectorAll("[data-scene-copy]")];
+  const states = animationCopy(slide).map(([title]) => title);
+  const paths = new Map([...root.querySelectorAll("[data-tv-route]")].map(path => [path.dataset.tvRoute, path]));
+  const nodes = root.querySelectorAll("[data-tv-node]");
+  const chips = root.querySelector(".tv-chips");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const svg = "http://www.w3.org/2000/svg";
+  const camera = {
+    flow:"translate(0px,0px) scale(1)",
+    exchange:"translate(-250px,-72px) scale(1.22)",
+    matrix:"translate(-476px,-439px) scale(1.9)",
+  };
+  const parseDocks = value => value ? value.split(";").map(token => token.split("|")) : [];
+  const scenes = copy.map(scene => ({
+    focus: new Set(scene.dataset.tvFocus.split(" ")),
+    carry: parseDocks(scene.dataset.tvCarry),
+    dock: parseDocks(scene.dataset.tvDock),
+    beats: [...scene.querySelectorAll("[data-tv-beat]")],
+    mode:scene.dataset.tvMode ?? "",
+    view:scene.dataset.tvView ?? "flow",
+    registered:scene.dataset.tvRegister === "true",
+    results:scene.dataset.tvResults ?? "0",
+  }));
+  let step = 0, flight = null, caption = null;
+
+  const snapshot = () => ({step, busy:flight !== null, caption, count:scenes.length, title:states[step]});
+
+  function marker(token, kind, route, reverse) {
+    const length = route.getTotalLength();
+    const start = route.getPointAtLength(reverse ? length : 0);
+    const end = route.getPointAtLength(reverse ? 0 : length);
+    const vertical = start.x === end.x;
+    const width = Math.max(62,[...token].reduce((sum,letter) => sum + (letter.charCodeAt(0) > 127 ? 14 : 8),18));
+    const padding = Math.min(vertical ? 4 : width / 2 + 4,length / 2);
+    const label = document.createElementNS(svg,"text");
+    const badge = document.createElementNS(svg,"rect");
+    const pin = document.createElementNS(svg,"circle");
+    const group = document.createElementNS(svg,"g");
+    group.setAttribute("class","tv-chip");
+    group.dataset.kind = kind;
+    badge.setAttribute("x",String(vertical ? 12 : -width / 2));
+    badge.setAttribute("y","-12");
+    badge.setAttribute("width",String(width));
+    badge.setAttribute("height","24");
+    badge.setAttribute("rx","4");
+    label.setAttribute("x",String(vertical ? 12 + width / 2 : 0));
+    label.textContent = token;
+    if (vertical) {
+      pin.setAttribute("r","4");
+      group.append(pin);
+    }
+    group.append(badge,label);
+    chips.append(group);
+
+    function pointAt(progress) {
+      const distance = padding + progress * (length - 2 * padding);
+      const point = route.getPointAtLength(reverse ? length - distance : distance);
+      return [point.x,point.y + (kind === "result" ? 26 : 0)];
+    }
+
+    return {
+      dock() {
+        const [x,y] = pointAt(1);
+        group.setAttribute("transform","translate(" + x + " " + y + ")");
+        group.dataset.tvArrival = route.dataset.tvRoute;
+      },
+      move() {
+        // Sample the actual route so the risk paths follow both orthogonal segments.
+        const intervals = Math.max(2,Math.ceil(length / 12));
+        const frames = Array.from({length:intervals + 1},(_,index) => {
+          const [x,y] = pointAt(index / intervals);
+          return {transform:"translate(" + x + "px," + y + "px)"};
+        });
+        return group.animate(frames,{duration:1030,easing:"cubic-bezier(.32,0,.42,1)",fill:"both"});
+      },
+    };
+  }
+
+  function paintDocks(tokens) {
+    chips.replaceChildren();
+    for (const [route,token,kind,direction] of tokens) {
+      marker(token,kind,paths.get(route),direction === "reverse").dock();
+    }
+  }
+
+  function lightRoutes(tokens, activeRoute) {
+    const highlighted = new Set(tokens.map(([route]) => route));
+    if (activeRoute) highlighted.add(activeRoute);
+    for (const [name,line] of paths) line.classList.toggle("tv-active",highlighted.has(name));
+  }
+
+  function visualState(scene) {
+    root.dataset.tvRegistered = String(scene.registered);
+    root.dataset.tvResults = scene.results;
+  }
+
+  function settle(scene) {
+    flight = null;
+    caption = null;
+    visualState(scene);
+    if (matrix) {
+      root.dataset.tvVaultPhase = scene.view === "matrix" ? "table" : "";
+      matrix.hidden = scene.view !== "matrix";
+    }
+    paintDocks(scene.dock);
+    lightRoutes(scene.dock);
+    onChange(snapshot());
+  }
+
+  function after(animation, done) {
+    flight = animation;
+    animation.onfinish = () => {
+      if (flight === animation) done();
+    };
+    onChange(snapshot());
+  }
+
+  function playBeat(scene, index, retained) {
+    const beat = scene.beats[index];
+    const {tvRoute,tvToken,tvKind} = beat.dataset;
+    const reverse = beat.hasAttribute("data-tv-reverse");
+    paintDocks(retained);
+    lightRoutes(retained,tvRoute);
+    caption = beat.textContent;
+    after(marker(tvToken,tvKind,paths.get(tvRoute),reverse).move(),() => {
+      if (tvRoute === "vault" && tvKind === "sealed" && !reverse) root.dataset.tvRegistered = "true";
+      const keepArrival = tvKind === "credential" && !reverse &&
+        (tvRoute === "github" || tvRoute.startsWith("normal-") || tvRoute.startsWith("direct-"));
+      const arrivals = keepArrival ? [...retained,[tvRoute,tvToken,tvKind]] : retained;
+      if (index + 1 < scene.beats.length) playBeat(scene,index + 1,arrivals);
+      else settle(scene);
+    });
+  }
+
+  function cameraMove(from,to,duration,done) {
+    after(world.animate(
+      [{transform:camera[from]},{transform:camera[to]}],
+      {duration,easing:"cubic-bezier(.22,.7,.27,1)"}
+    ),done);
+  }
+
+  function openVaultTable(scene) {
+    // Reveal the table from the on-screen Vault outline, accounting for Reveal's slide scale.
+    const anchor = vault.querySelector("rect").getBoundingClientRect();
+    matrix.hidden = false;
+    const panel = matrix.getBoundingClientRect();
+    const inset = [
+      (anchor.top - panel.top) / panel.height,
+      (panel.right - anchor.right) / panel.width,
+      (panel.bottom - anchor.bottom) / panel.height,
+      (anchor.left - panel.left) / panel.width,
+    ].map(fraction => Math.max(0,Math.min(1,fraction)) * 100 + "%").join(" ");
+    root.dataset.tvVaultPhase = "opening";
+    caption = "Vaultの保管内容を、利用者の行とツールの列で見る。";
+    after(matrix.animate(
+      [{clipPath:"inset(" + inset + " round 7px)",opacity:0},
+       {opacity:0.08,offset:0.35},
+       {clipPath:"inset(0% round 7px)",opacity:1}],
+      {duration:740,easing:"cubic-bezier(.22,.7,.27,1)"}
+    ),() => settle(scene));
+  }
+
+  function focusVault(scene, from) {
+    const prior = scenes[step - 1];
+    visualState(scene);
+    root.dataset.tvView = from;
+    world.style.transform = camera[from];
+    paintDocks(prior.dock);
+    lightRoutes(prior.dock);
+    // Establish the previous layout before fading the surrounding components, including on replay.
+    world.getBoundingClientRect();
+    root.dataset.tvView = scene.view;
+    world.style.transform = camera[scene.view];
+    caption = "GatewayとVaultの交換を見たあと、Token Vaultの保管内容に注目。";
+    cameraMove(from,scene.view,1200,() => {
+      root.dataset.tvVaultPhase = "focused";
+      caption = "Vaultは、どの利用者のどのツール用かをひも付けて認証情報を保管する。";
+      after(vault.animate([{opacity:1},{opacity:1}],{duration:1500}),() => openVaultTable(scene));
+    });
+  }
+
+  function show(index, animate, replay = false) {
+    flight?.cancel();
+    step = Math.max(0,Math.min(scenes.length - 1,index));
+    const scene = scenes[step];
+    const previousView = replay && scene.view === "matrix" ? scenes[step - 1].view : root.dataset.tvView ?? "flow";
+    const moving = animate && !reduced.matches;
+    if (matrix) {
+      matrix.hidden = true;
+      root.dataset.tvVaultPhase = moving && scene.view === "matrix" ? "approach" : "";
+    }
+    root.dataset.tvView = scene.view;
+    root.dataset.tvMode = scene.mode;
+    for (const node of nodes) node.classList.toggle("tv-active",scene.focus.has(node.dataset.tvNode));
+    if (world) world.style.transform = camera[scene.view];
+
+    function present() {
+      if (moving && scene.beats.length) playBeat(scene,0,scene.carry);
+      else settle(scene);
+    }
+
+    if (moving && matrix && scene.view === "matrix") {
+      focusVault(scene,previousView);
+    } else if (moving && world && previousView !== scene.view) {
+      visualState(scene);
+      paintDocks([]);
+      lightRoutes([]);
+      caption = "Gateway、Vault、GitHub MCPの3者に注目。";
+      cameraMove(previousView,scene.view,700,present);
+    } else {
+      if (moving) visualState(scenes[step - 1] ?? scene);
+      present();
+    }
+  }
+
+  reduced.addEventListener("change",() => { if (reduced.matches && flight) show(step,false); });
+  show(0,false);
+  return {
+    next() { if (!flight) show(step + 1,true); },
+    previous() { show(step - 1,false); },
+    replay() { if (!flight) show(step,true,true); },
+    jump(index) { show(index,false); },
+    cancel() { show(step,false); },
+    getState:snapshot,
+    states,
+  };
+}
+
 // Scene copy belongs to the component snippet and supports the normal ID overrides.
 function animationCopy(root){
   return [...root.querySelectorAll('[data-scene-copy]')].map(copy =>
@@ -2335,7 +3455,8 @@ function animationCopy(root){
   const animations=new Map(),steppers=new Map();let ready=false,activePage=null;
   document.querySelectorAll('[data-animation]').forEach(page=>{
     const mounts={connectivity:mountConnectivity,gateway:mountGateway,'context-mcp':mountP1};
-    animations.set(page,mounts[page.dataset.animation](page,()=>queueMicrotask(()=>{if(ready)update();})));
+    const mount=page.dataset.animation==='token-vault'?mountTokenVault:mounts[page.dataset.animation];
+    animations.set(page,mount(page,()=>queueMicrotask(()=>{if(ready)update();})));
   });
   function currentPage(){return deck.getCurrentSlide();}
   function current(){return animations.get(currentPage());}
@@ -2469,7 +3590,8 @@ function animationCopy(root){
       currentPage().querySelector('[data-animation-toolbar]').append(controls);
       const copy=currentPage().querySelectorAll('[data-scene-copy]')[state.step];
       for(const [target,source] of [['heading','title'],['description','description'],['caption','caption']]){
-        currentPage().querySelector('[data-scene-'+target+']').textContent=copy.querySelector('[data-motion-'+source+']').textContent;
+        const text=target==='caption'?state.caption:null;
+        currentPage().querySelector('[data-scene-'+target+']').textContent=text??copy.querySelector('[data-motion-'+source+']').textContent;
       }
       if(sceneSelect.dataset.page!==currentPage().id){
         sceneSelect.replaceChildren(...animation.states.map((title,i)=>new Option(`${i+1}/${state.count}　${title}`,i)));
@@ -2498,12 +3620,17 @@ function animationCopy(root){
     document.querySelector('[data-nav-label]').textContent=vertical?(atLast?'目次へ':'次へ'):(h===0?'概要へ':atEnd?'概要に戻る':'詳細');
     if(state){
       document.querySelector('[data-location]').textContent=`${String(h).padStart(2,'0')} / SCENE ${state.step+1}/${state.count}`;
-      const label=state.step<state.count-1?'次のシーンへ':vertical?'次のページへ':'概要に戻る';
-      next.textContent=state.step<state.count-1||vertical?'↓':'↥';
-      next.setAttribute('aria-label',label);document.querySelector('[data-nav-label]').textContent=state.step<state.count-1?'シーン':vertical?'次へ':'概要に戻る';
+      if(state.step<state.count-1){
+        next.textContent='↓';
+        next.setAttribute('aria-label','次のシーンへ');
+        document.querySelector('[data-nav-label]').textContent='シーン';
+      } else if(!atEnd) {
+        next.setAttribute('aria-label','次のページへ');
+        document.querySelector('[data-nav-label]').textContent='次のページ';
+      }
     }
     const stepState=currentStepper()?.getState();
-    document.querySelector('[data-up]').setAttribute('aria-label',stepState?.step>0?'前のシーンへ':'前の詳細へ');
+    document.querySelector('[data-up]').setAttribute('aria-label',(state?.step??stepState?.step??0)>0?'前のシーンへ':'前の詳細へ');
     if(stepState&&stepState.step<stepState.count-1){
       next.textContent='↓';
       next.setAttribute('aria-label','次のシーンへ');
